@@ -10,30 +10,59 @@
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
+      <div *ngIf="credentialsForm.controls.name.errors && (credentialsForm.controls.name.touched || credentialsForm.controls.name.dirty)">
+        <div *ngIf="credentialsForm.controls.name.errors.required">Se requiere este campo</div>
+        <div *ngIf="credentialsForm.controls.name.errors.minlength">Mínimo número de caracteres 3</div>
+        <div *ngIf="credentialsForm.controls.name.errors.maxlength">Máximo número de caracteres 30</div>
+      </div>
     </ion-item>
  
     <ion-item>
       <ion-label position="floating">Apellido</ion-label>
       <ion-input type="text" formControlName="surname"></ion-input>
+      <div *ngIf="credentialsForm.controls.name.errors && (credentialsForm.controls.surname.touched || credentialsForm.controls.surname.dirty)">
+        <div *ngIf="credentialsForm.controls.surname.errors.required">Se requiere este campo</div>
+        <div *ngIf="credentialsForm.controls.surname.errors.minlength">Mínimo número de caracteres 3</div>
+        <div *ngIf="credentialsForm.controls.surname.errors.maxlength">Máximo número de caracteres 30</div>
+      </div>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Fecha de nacimiento</ion-label>
       <ion-input type="date" formControlName="birthDate"></ion-input>
+      <div *ngIf="credentialsForm.controls.birthDate.errors && (credentialsForm.controls.name.touched || credentialsForm.controls.birthDate.dirty)">
+        <div *ngIf="credentialsForm.controls.birthDate.errors.required">Se requiere este campo</div>
+      </div>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
+      <div *ngIf="credentialsForm.controls.email.errors && (credentialsForm.controls.name.touched || credentialsForm.controls.email.dirty)">
+        <div *ngIf="credentialsForm.controls.email.errors.required">Se requiere este campo</div>
+        <div *ngIf="credentialsForm.controls.email.errors.email">El formato del email no es correcto</div>
+      </div>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
       <ion-input type="password" formControlName="password"></ion-input>
+      <div *ngIf="credentialsForm.controls.password.errors && (credentialsForm.controls.password.touched || credentialsForm.controls.password.dirty)">
+        <div *ngIf="credentialsForm.controls.password.errors.required">Se requiere este campo</div>
+        <div *ngIf="credentialsForm.controls.password.errors.minlength">Mínimo número de caracteres 8</div>
+        <div *ngIf="credentialsForm.controls.password.errors.maxlength">Máximo número de caracteres 30</div>
+        <div *ngIf="credentialsForm.controls.password.errors.pattern">La contraseña debe tener una letra mayúscula, una letra minúscula, un número y un caracter especial (@ ! _ % * ? &)</div>
+      </div>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Confirmar contraseña</ion-label>
-      <ion-input type="password" formControlName="repeatPassword"></ion-input>
+      <ion-input type="repeatPassword" formControlName="repeatPassword"></ion-input>
+      <div *ngIf="credentialsForm.controls.repeatPassword.errors && (credentialsForm.controls.repeatPassword.touched || credentialsForm.controls.repeatPassword.dirty)">
+        <div *ngIf="credentialsForm.controls.repeatPassword.errors.required">Se requiere este campo</div>
+        <div *ngIf="credentialsForm.controls.repeatPassword.errors.minlength">Mínimo número de caracteres 8</div>
+        <div *ngIf="credentialsForm.controls.repeatPassword.errors.maxlength">Máximo número de caracteres 30</div>
+        <div *ngIf="credentialsForm.controls.repeatPassword.errors.pattern">La contraseña debe tener una letra mayúscula, una letra minúscula, un número y un caracter especial (@ ! _ % * ? &)</div>
+      </div>
     </ion-item>
 
     <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Enviar</ion-button>

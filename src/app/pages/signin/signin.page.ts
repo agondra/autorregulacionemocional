@@ -17,12 +17,12 @@ export class SigninPage implements OnInit {
  
   ngOnInit() {
     this.credentialsForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      repeatPassword: ['', [Validators.required, Validators.minLength(6)]],
-      birthDate:['',[Validators.required]],
-      name: ['', [Validators.required]],
-      surname: ['', [Validators.required]]
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30),Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!$_%*?&])[A-Za-z\d$@$!$_%*?&].{8,}')])],
+      repeatPassword: ['', Validators.compose([Validators.required, Validators.minLength(8),Validators.maxLength(30),Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!$_%*?&])[A-Za-z\d$@$!$_%*?&].{8,}')])],
+      birthDate:['',Validators.compose([Validators.required])],
+      name: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(30)])],
+      surname: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(30)])]
       
     });
   }
