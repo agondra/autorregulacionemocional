@@ -29,19 +29,18 @@
     <ion-item>
       <ion-label position="floating">Fecha de nacimiento</ion-label>
       <ion-input type="date" formControlName="birthDate"></ion-input>
-      <div *ngIf="credentialsForm.controls.birthDate.errors && (credentialsForm.controls.name.touched || credentialsForm.controls.birthDate.dirty)">
+      <div *ngIf="credentialsForm.controls.birthDate.errors && (credentialsForm.controls.birthDate.touched || credentialsForm.controls.birthDate.dirty)">
         <div *ngIf="credentialsForm.controls.birthDate.errors.required">Se requiere este campo</div>
-      
+        <div *ngIf="credentialsForm.controls.birthDate.errors.fecha">La fecha debe ser mayor de 1920 y se deben tener 5 años como mínimo</div> 
       </div>
       <div> 
-        {{credentialsForm.controls.birthDate.errors | json}}
       </div>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
-      <div *ngIf="credentialsForm.controls.email.errors && (credentialsForm.controls.name.touched || credentialsForm.controls.email.dirty)">
+      <div *ngIf="credentialsForm.controls.email.errors && (credentialsForm.controls.email.touched || credentialsForm.controls.email.dirty)">
         <div *ngIf="credentialsForm.controls.email.errors.required">Se requiere este campo</div>
         <div *ngIf="credentialsForm.controls.email.errors.email">El formato del email no es correcto</div>
       </div>
@@ -49,7 +48,7 @@
 
     <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
+      <ion-input type="text" formControlName="password" ></ion-input>
       <div *ngIf="credentialsForm.controls.password.errors && (credentialsForm.controls.password.touched || credentialsForm.controls.password.dirty)">
         <div *ngIf="credentialsForm.controls.password.errors.required">Se requiere este campo</div>
         <div *ngIf="credentialsForm.controls.password.errors.minlength">Mínimo número de caracteres 8</div>
@@ -60,14 +59,14 @@
 
     <ion-item>
       <ion-label position="floating">Confirmar contraseña</ion-label>
-      <ion-input type="password" formControlName="repeatPassword"></ion-input>
+      <ion-input type="password" formControlName="repeatPassword" [disabled]="credentialsForm.controls.password.errors"></ion-input>
       <div *ngIf="credentialsForm.controls.repeatPassword.errors && (credentialsForm.controls.repeatPassword.touched || credentialsForm.controls.repeatPassword.dirty)">
         <div *ngIf="credentialsForm.controls.repeatPassword.errors.required">Se requiere este campo</div>
         <div *ngIf="credentialsForm.controls.repeatPassword.errors.minlength">Mínimo número de caracteres 8</div>
         <div *ngIf="credentialsForm.controls.repeatPassword.errors.maxlength">Máximo número de caracteres 30</div>
-        <div *ngIf="credentialsForm.controls.repeatPassword.errors.pattern">La contraseña debe tener una letra mayúscula, una letra minúscula, un número y un caracter especial (@ ! _ % * ? &)</div>
+        <div *ngIf="credentialsForm.controls.repeatPassword.errors.notEquals">La contraseña no son iguales</div>
       </div>
-      {{this.credentialsForm.controls.repeatPassword.errors | json}}
+     
     </ion-item>
 
     <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Enviar</ion-button>

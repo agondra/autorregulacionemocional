@@ -15,20 +15,22 @@ export class SigninPage implements OnInit {
 
   credentialsForm: FormGroup;
  
-  constructor(private alertCtrl:AlertController,private formBuilder: FormBuilder, private authService: AuthService, private route:Router) { }
- 
-  ngOnInit() {
+  constructor(private alertCtrl:AlertController,private formBuilder: FormBuilder, private authService: AuthService, private route:Router) {
     this.credentialsForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30),Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!$_%*?&])[A-Za-z\d$@$!$_%*?&].{8,}')])],
-      repeatPassword: ['', Validators.compose([Validators.required, Validators.minLength(8),Validators.maxLength(30),Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!$_%*?&])[A-Za-z\d$@$!$_%*?&].{8,}')])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!$_%*?&])([A-Za-z\d$@$!$_%*?&]|[^ ,.#~()-]){8,}$')])],
+      repeatPassword: ['', Validators.compose([])],                                                                                 
       birthDate:['',Validators.compose([Validators.required, ValidatorsDate.validatorsDate])],
       name: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(30)])],
       surname: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(30)])]
       
     });
 
-    this.credentialsForm.get('repeatPassword').setValidators(CustomValidators.equals(this.credentialsForm.get('password')));
+    this.credentialsForm.get('repeatPassword').setValidators([CustomValidators.equals(this.credentialsForm.get('password')),Validators.required,Validators.minLength(3),Validators.maxLength(30)]);
+   }
+ 
+  ngOnInit() {
+   
   }
  
   onSubmit() {
