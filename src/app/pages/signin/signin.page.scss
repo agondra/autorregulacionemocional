@@ -1,0 +1,28 @@
+ion-content{
+
+    .content{
+        
+        background: url("https://media.giphy.com/media/NBRKHTRVQ01O/source.gif") no-repeat  ;  
+        background-size:contain;
+       
+        display:flex;
+        flex-direction: column;
+        width:100%;
+        height: 100%;
+        justify-content:flex-start;
+        align-items: center;
+    }
+
+    .center{
+       
+        display:flex;
+        flex-direction:column;
+        max-width:400px;
+      
+       min-height: 500px;
+        min-width: 300px;
+        justify-content:space-around;
+        align-items:center;
+        
+    }
+}

@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'language.language' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  
+<ion-list>
+  <ion-radio-group [(ngModel)]="activateLang" >
+    <ion-list-header>
+      <ion-label>{{'language.changeLanguage' | translate}}</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>{{'language.spanish' | translate}}</ion-label>
+      <ion-radio slot="start" value="es" [checked]="activateLang=='es'"></ion-radio> 
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>{{'language.english'| translate}}</ion-label>
+      <ion-radio slot="start" value="en"  [checked]="activateLang=='en'"></ion-radio> 
+    </ion-item>
+
+  
+  </ion-radio-group>
+</ion-list>
+<ion-button (click)="changeLanguage()">{{'language.buttonChange' | translate}}</ion-button>
+</ion-content>

@@ -28,7 +28,7 @@ export class HomePage implements OnInit {
   }
  
   clearToken() {
-    // ONLY FOR TESTING!
+
     this.storage.remove('access_token');
  
     let toast = this.toastController.create({

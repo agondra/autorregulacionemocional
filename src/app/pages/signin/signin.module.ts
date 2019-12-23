@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { SigninPageRoutingModule } from './signin-routing.module';
 
 import { SigninPage } from './signin.page';
@@ -22,7 +22,8 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     SigninPageRoutingModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule.forChild()
   ],
   declarations: [SigninPage]
 })

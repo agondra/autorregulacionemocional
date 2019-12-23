@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
- 
+import { TranslateConfigService } from '../../services/translate-config.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
- 
+  selectedLanguage:string;
   credentialsForm: FormGroup;
  
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private route:Router) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private route:Router) { 
+      }
  
   ngOnInit() {
     this.credentialsForm = this.formBuilder.group({
@@ -36,5 +38,5 @@ export class LoginPage implements OnInit {
       this.authService.login(this.credentialsForm.value).subscribe();
     });
   }
- 
+
 }

@@ -1,19 +1,23 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+
  
-<ion-content padding>
+<ion-content>
+  <div class="content">
+   
+    <div class="center">
+      <div class="logo">
+        Autorregulación emocional
+  
+      </div>
+      <div class="form">
   <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()">
  
     <ion-item>
-      <ion-label position="floating">Email</ion-label>
+      <ion-label position="floating">{{'login.email' | translate:params }}</ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
     </ion-item>
  
     <ion-item>
-      <ion-label position="floating">Password</ion-label>
+      <ion-label position="floating">{{'login.password' | translate}}</ion-label>
       <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
  
@@ -21,4 +25,8 @@
     <ion-button expand="full" type="button" (click)="register()" [disabled]="!credentialsForm.valid">Register</ion-button>
  
   </form>
+  </div>
+  </div>
+  </div>
+
 </ion-content>

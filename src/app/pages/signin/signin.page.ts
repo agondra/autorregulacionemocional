@@ -6,14 +6,16 @@ import { AlertController } from '@ionic/angular';
 import { CustomValidators } from '../../validators/ValidatorPassword';
 import { ValidatorsDate } from '../../validators/ValidatorsDate';
 
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.page.html',
   styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
-
+  vistaPassword: string;
   credentialsForm: FormGroup;
+  iconoPassword:string;
  
   constructor(private alertCtrl:AlertController,private formBuilder: FormBuilder, private authService: AuthService, private route:Router) {
     this.credentialsForm = this.formBuilder.group({
@@ -30,7 +32,8 @@ export class SigninPage implements OnInit {
    }
  
   ngOnInit() {
-   
+   this.vistaPassword="password";
+   this.iconoPassword="eye-off";
   }
  
   onSubmit() {
@@ -59,6 +62,17 @@ export class SigninPage implements OnInit {
     });
     await alert.present();
   
+  }
+
+  cambioIcono(){
+    if (this.iconoPassword==='eye'){
+      this.iconoPassword='eye-off';
+      this.vistaPassword="password"
+
+    }else{
+      this.iconoPassword='eye';
+      this.vistaPassword="text"
+    }
   }
 
 }

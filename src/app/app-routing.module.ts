@@ -26,9 +26,13 @@ const routes: Routes = [
     canActivate:[AuthGuardService]
   },
   {
+    path: 'language',
+    loadChildren: () => import('./pages/language/language.module').then( m => m.LanguagePageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
-  },
+  }
 ];
 
 @NgModule({

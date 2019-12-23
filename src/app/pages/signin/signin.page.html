@@ -3,74 +3,93 @@
     <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
- 
 <ion-content padding>
+  <div class="content">
+   
+    <div class="center">
+      <div class="logo">
+        {{'signin.title' | translate}}
+  
+      </div>
+      <div class="form">
   <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()">
  
     <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
+      <ion-label position="floating">{{'signin.name' | translate}}</ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
+      <ion-icon name="checkmark-circle" slot="end" *ngIf="!credentialsForm.controls.name.errors"></ion-icon>
       <div *ngIf="credentialsForm.controls.name.errors && (credentialsForm.controls.name.touched || credentialsForm.controls.name.dirty)">
-        <div *ngIf="credentialsForm.controls.name.errors.required">Se requiere este campo</div>
-        <div *ngIf="credentialsForm.controls.name.errors.minlength">Mínimo número de caracteres 3</div>
-        <div *ngIf="credentialsForm.controls.name.errors.maxlength">Máximo número de caracteres 30</div>
+        <div *ngIf="credentialsForm.controls.name.errors.required">{{'signin.errors.require' | translate}}}</div>
+        <div *ngIf="credentialsForm.controls.name.errors.minlength">{{'signin.errrors.min' | translate}}</div>
+        <div *ngIf="credentialsForm.controls.name.errors.maxlength">{{'signin.errrors.max' | translate}}</div>
       </div>
     </ion-item>
  
     <ion-item>
-      <ion-label position="floating">Apellido</ion-label>
+      <ion-label position="floating">{{'signin.surname' | translate}}</ion-label>
       <ion-input type="text" formControlName="surname"></ion-input>
-      <div *ngIf="credentialsForm.controls.name.errors && (credentialsForm.controls.surname.touched || credentialsForm.controls.surname.dirty)">
-        <div *ngIf="credentialsForm.controls.surname.errors.required">Se requiere este campo</div>
-        <div *ngIf="credentialsForm.controls.surname.errors.minlength">Mínimo número de caracteres 3</div>
-        <div *ngIf="credentialsForm.controls.surname.errors.maxlength">Máximo número de caracteres 30</div>
+      <ion-icon name="checkmark-circle" slot="end" *ngIf="!credentialsForm.controls.surname.errors"></ion-icon>
+      <div *ngIf="credentialsForm.controls.surname.errors && (credentialsForm.controls.surname.touched || credentialsForm.controls.surname.dirty)">
+        <div *ngIf="credentialsForm.controls.surname.errors.required">{{'signin.errors.require' | translate}}}</div>
+        <div *ngIf="credentialsForm.controls.surname.errors.minlength">{{'signin.errrors.min' | translate}}</div>
+        <div *ngIf="credentialsForm.controls.surname.errors.maxlength">{{'signin.errrors.max' | translate}}</div>
       </div>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Fecha de nacimiento</ion-label>
+      <ion-label position="floating">{{'signin.birthdate' | translate}}</ion-label>
       <ion-input type="date" formControlName="birthDate"></ion-input>
+      <ion-icon name="checkmark-circle" slot="end" *ngIf="!credentialsForm.controls.birthDate.errors"></ion-icon>
       <div *ngIf="credentialsForm.controls.birthDate.errors && (credentialsForm.controls.birthDate.touched || credentialsForm.controls.birthDate.dirty)">
-        <div *ngIf="credentialsForm.controls.birthDate.errors.required">Se requiere este campo</div>
-        <div *ngIf="credentialsForm.controls.birthDate.errors.fecha">La fecha debe ser mayor de 1920 y se deben tener 5 años como mínimo</div> 
+        <div *ngIf="credentialsForm.controls.birthDate.errors.required">{{'signin.errrors.require'| translate}}</div>
+        <div *ngIf="credentialsForm.controls.birthDate.errors.fecha">{{'signin.errors.date' | translate}}</div> 
       </div>
       <div> 
       </div>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Email</ion-label>
+      <ion-label position="floating">{{'signin.email' | translate}}</ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
+      <ion-icon name="checkmark-circle" slot="end" *ngIf="!credentialsForm.controls.email.errors"></ion-icon>
       <div *ngIf="credentialsForm.controls.email.errors && (credentialsForm.controls.email.touched || credentialsForm.controls.email.dirty)">
-        <div *ngIf="credentialsForm.controls.email.errors.required">Se requiere este campo</div>
-        <div *ngIf="credentialsForm.controls.email.errors.email">El formato del email no es correcto</div>
+        <div *ngIf="credentialsForm.controls.email.errors.required">{{'signin.errors.require' | translate}}</div>
+        <div *ngIf="credentialsForm.controls.email.errors.email">{{'signin.errors.email' | translate}}</div>
       </div>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="text" formControlName="password" ></ion-input>
+      <ion-label position="floating">{{'signin.password' | translate}}</ion-label>
+      <ion-input type="{{vistaPassword}}" formControlName="password" ></ion-input>
+      <ion-icon name="{{iconoPassword}}" (click)="cambioIcono()" slot="end"></ion-icon>
+      <ion-icon name="checkmark-circle" slot="end" *ngIf="!credentialsForm.controls.password.errors"></ion-icon>
       <div *ngIf="credentialsForm.controls.password.errors && (credentialsForm.controls.password.touched || credentialsForm.controls.password.dirty)">
-        <div *ngIf="credentialsForm.controls.password.errors.required">Se requiere este campo</div>
-        <div *ngIf="credentialsForm.controls.password.errors.minlength">Mínimo número de caracteres 8</div>
-        <div *ngIf="credentialsForm.controls.password.errors.maxlength">Máximo número de caracteres 30</div>
-        <div *ngIf="credentialsForm.controls.password.errors.pattern">La contraseña debe tener una letra mayúscula, una letra minúscula, un número y un caracter especial (@ ! _ % * ? &)</div>
+        <div *ngIf="credentialsForm.controls.password.errors.required">{{'signin.errors.require' | translate}}</div>
+        <div *ngIf="credentialsForm.controls.password.errors.minlength">{{'signin.errors.min' | translate}}</div>
+        <div *ngIf="credentialsForm.controls.password.errors.maxlength">{{'signin.errors.max' | translate}}</div>
+        <div *ngIf="credentialsForm.controls.password.errors.pattern">{{'signin.errors.password' | translate}}</div>
       </div>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Confirmar contraseña</ion-label>
-      <ion-input type="password" formControlName="repeatPassword" [disabled]="credentialsForm.controls.password.errors"></ion-input>
+      <ion-label position="floating">{{'signin.repeatpassword' | translate}}</ion-label>
+      <ion-input type="{{vistaPassword}}" formControlName="repeatPassword" [disabled]="credentialsForm.controls.password.errors"></ion-input>
+      <ion-icon name="{{iconoPassword}}" (click)="cambioIcono()" slot="end"></ion-icon>
+      <ion-icon name="checkmark-circle" slot="end" *ngIf="!credentialsForm.controls.repeatPassword.errors"></ion-icon>
+    
       <div *ngIf="credentialsForm.controls.repeatPassword.errors && (credentialsForm.controls.repeatPassword.touched || credentialsForm.controls.repeatPassword.dirty)">
-        <div *ngIf="credentialsForm.controls.repeatPassword.errors.required">Se requiere este campo</div>
-        <div *ngIf="credentialsForm.controls.repeatPassword.errors.minlength">Mínimo número de caracteres 8</div>
-        <div *ngIf="credentialsForm.controls.repeatPassword.errors.maxlength">Máximo número de caracteres 30</div>
-        <div *ngIf="credentialsForm.controls.repeatPassword.errors.notEquals">La contraseña no son iguales</div>
+        <div *ngIf="credentialsForm.controls.repeatPassword.errors.required">{{'signin.errors.require' | translate}}</div>
+        <div *ngIf="credentialsForm.controls.repeatPassword.errors.minlength">{{'signin.errors.min' | translate}}</div>
+        <div *ngIf="credentialsForm.controls.repeatPassword.errors.maxlength">{{'signin.errors.max' | translate}</div>
+        <div *ngIf="credentialsForm.controls.repeatPassword.errors.notEquals">{{'signin.errors.equals' | translate}}</div>
       </div>
      
     </ion-item>
 
-    <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Enviar</ion-button>
+    <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">{{'signin.send' | translate}}</ion-button>
     
  
   </form>
+</div>
+</div>
+</div>
 </ion-content>

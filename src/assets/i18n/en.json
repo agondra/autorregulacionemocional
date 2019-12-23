@@ -1,0 +1,36 @@
+{
+    "login": {
+        "email":"email",
+        "password":"password"
+    },
+
+    "signin":{
+        "title":"title",
+        "name":"name",
+        "surname":"surname",
+        "birthdate":"birth date",
+        "email":"email",
+        "password":"password",
+        "repeatpassword":"repeat password",
+        "send":"send",
+        "errors":{
+            "require":"This field is required",
+            "min":"Minimum number of characters 8",
+            "max":"Maximum number of characters 30",
+            "password":"The password must have an uppercase letter, a lowercase letter, a number and a special character (@! _% *? &)",
+            "email":"the email format is not correct",
+            "equals":"passwords are not equal",
+            "date":"The date must be greater than 1920 and you must be at least 6 years old"
+        }
+    },
+    "language":{
+        "language":"language",
+        "english":"english",
+        "spanish":"spanish",
+        "changeLanguage": "selected language",
+        "buttonChange": "change language"
+        
+    }
+
+
+}
