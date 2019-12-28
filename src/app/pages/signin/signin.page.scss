@@ -2,8 +2,8 @@ ion-content{
 
     .content{
         
-        background: url("https://media.giphy.com/media/NBRKHTRVQ01O/source.gif") no-repeat  ;  
-        background-size:contain;
+        background: url("https://media.giphy.com/media/84fFptgxiU7cY/giphy.gif") no-repeat  ;  
+        background-size:cover;
        
         display:flex;
         flex-direction: column;
@@ -11,8 +11,20 @@ ion-content{
         height: 100%;
         justify-content:flex-start;
         align-items: center;
+        
+        .logo{
+            background:url(../../../assets/logo/logo.png)  no-repeat;
+            background-size:contain;
+          
+            min-height: 200px;
+            min-width: 300px;
+        }
     }
 
+    .item{
+        border-radius: 20px;
+        border:solid 1px white;
+    }
     .center{
        
         display:flex;
