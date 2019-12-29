@@ -74,5 +74,7 @@ export class SigninPage implements OnInit {
       this.vistaPassword="text"
     }
   }
-
+  goLogin(){
+    this.route.navigate(['login']);
+  }
 }
