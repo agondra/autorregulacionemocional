@@ -87,4 +87,39 @@ ion-content{
         align-items:center;
         
     }
+
+    .policy{
+        outline:none;
+        color:rgb(171, 196, 207);
+    }
+    .policy:first-letter{
+        text-transform: capitalize;
+
+    }
+    .policy:active{
+        color:white;
+    }
+    .registry{
+        outline:none;
+        color:rgb(171, 196, 207);
+    }
+
+    .registry:first-letter{
+        text-transform: capitalize;
+
+    }
+    .registry:active{
+        color:white;
+    }
+    .refreshPassword{
+        outline:none;
+        color:rgb(171, 196, 207);   
+    }
+
+    .refreshPassword:first-letter{
+        text-transform: capitalize;
+    }
+    .refreshPassword:active{
+        color:white;
+    }
 }

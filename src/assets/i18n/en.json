@@ -2,7 +2,10 @@
     "login": {
         "email":"email",
         "password":"password",
-        "login":"login"
+        "login":"login",
+        "refreshPassword":"Have you forgotten the password?",
+        "policy":"Privacy Policy",
+        "registry":"Registry"
     },
 
     "signin":{

@@ -13,18 +13,21 @@
     <ion-label position="floating">{{'login.email' | translate:params }}</ion-label>
     <div class="item">
       
-      <ion-input type="email" formControlName="email"></ion-input>
+      <ion-input type="email" formControlName="email"> <ion-icon name="mail" slot="start"></ion-icon></ion-input>
     </div>
     <ion-label position="floating">{{'login.password' | translate}}</ion-label>
     <div class="item">
       
-      <ion-input type="password" formControlName="password"></ion-input>
+      <ion-input type="password" formControlName="password"> <ion-icon name="lock" slot="start"></ion-icon></ion-input>
     </div>
  
     <button class="button" [ngClass]="!credentialsForm.valid ? 'buttondisabled': 'buttonenabled'"  type="submit" [disabled]="!credentialsForm.valid">{{'login.login'|translate}}</button>
 
  
   </form>
+  <div class="policy" (click)="goPolicy()">{{'login.policy' | translate:params }}</div>
+  <div class="registry"  (click)="goSignin()">{{'login.registry' | translate:params }}</div>
+  <div class="refreshPassword"  (click)="goSignin()">{{'login.refreshPassword' | translate:params }}</div>
   </div>
   </div>
   </div>

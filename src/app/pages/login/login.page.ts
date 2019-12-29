@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.credentialsForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
  
@@ -32,11 +32,13 @@ export class LoginPage implements OnInit {
     });
   }
  
-  register() {
-    this.authService.register(this.credentialsForm.value).subscribe(res => {
-      // Call Login to automatically login the new user
-      this.authService.login(this.credentialsForm.value).subscribe();
-    });
-  }
+goSignin(){
+  
+  this.route.navigate(['signin']);
+}
 
+goPolicy(){
+  console.log("kdlkjfsljd");
+  this.route.navigate(['policy']);
+}
 }

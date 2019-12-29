@@ -30,6 +30,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/language/language.module').then( m => m.LanguagePageModule)
   },
   {
+    path: 'policy',
+    loadChildren: () => import('./pages/policy/policy.module').then( m => m.PolicyPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   }
