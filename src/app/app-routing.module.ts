@@ -34,6 +34,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/policy/policy.module').then( m => m.PolicyPageModule)
   },
   {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   }

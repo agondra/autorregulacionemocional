@@ -38,7 +38,11 @@ goSignin(){
 }
 
 goPolicy(){
-  console.log("kdlkjfsljd");
   this.route.navigate(['policy']);
 }
+
+goResetPassword(){
+  this.route.navigate(['reset-password']);
+}
+
 }

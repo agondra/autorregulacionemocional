@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { environment } from '../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { ok } from 'assert';
  
 const TOKEN_KEY = 'access_token';
  
@@ -72,6 +73,22 @@ export class AuthService {
     });
   }
  
+  resetPassword(credentials){
+    return this.http.post(`${this.url}/api/reset`, credentials).pipe(
+      tap(
+        res=>{
+          console.log(res);
+          this.showAlert(" An email has been sent to reset your password to your email address","Warning");
+          return "ok";
+        }
+      ), 
+      catchError(e => {
+        this.showAlert(e.error.msg);
+        throw new Error(e);
+      })
+    );
+
+  }
   getSpecialData() {
     return this.http.get(`${this.url}/api/special`).pipe(
       catchError(e => {
@@ -89,10 +106,10 @@ export class AuthService {
     return this.authenticationState.value;
   }
  
-  showAlert(msg) {
+  showAlert(msg, header='Error') {
     let alert = this.alertController.create({
       message: msg,
-      header: 'Error',
+      header: header,
       buttons: ['OK']
     });
     alert.then(alert => alert.present());

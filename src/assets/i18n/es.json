@@ -34,6 +34,10 @@
         "spanish":"español",
         "changeLanguage":"Elige idioma",
         "buttonChange":"cambiar idioma"
+    },
+
+    "resetPassword":{
+        "email":"Introduce el email "
     }
 
 
