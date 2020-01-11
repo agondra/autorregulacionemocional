@@ -4,7 +4,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthNotGuardService } from './services/auth-not-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full', canActivate:[AuthNotGuardService] },
  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
@@ -39,7 +39,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
+    canActivate:[AuthNotGuardService]
   }
 ];
 

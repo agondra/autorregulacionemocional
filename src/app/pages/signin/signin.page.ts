@@ -5,19 +5,23 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { CustomValidators } from '../../validators/ValidatorPassword';
 import { ValidatorsDate } from '../../validators/ValidatorsDate';
-
+import { environment } from '../../../environments/environment';
+import { Storage } from '@ionic/storage';
+import { JwtHelperService } from '@auth0/angular-jwt';
+const TOKEN_KEY = 'access_token';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.page.html',
   styleUrls: ['./signin.page.scss'],
 })
+
 export class SigninPage implements OnInit {
   vistaPassword: string;
   credentialsForm: FormGroup;
   iconoPassword:string;
  
-  constructor(private alertCtrl:AlertController,private formBuilder: FormBuilder, private authService: AuthService, private route:Router) {
+  constructor(private helper:JwtHelperService,private storage:Storage,private alertCtrl:AlertController,private formBuilder: FormBuilder, private authService: AuthService, private route:Router) {
     this.credentialsForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!$_%*?&])([A-Za-z\d$@$!$_%*?&]|[^ ,.#~()-]){8,}$')])],
@@ -32,6 +36,19 @@ export class SigninPage implements OnInit {
    }
  
   ngOnInit() {
+    this.storage.get(TOKEN_KEY).then(token => {
+      if (token) {
+        let decoded = this.helper.decodeToken(token);
+        let isExpired = this.helper.isTokenExpired(token);
+ 
+        if (!isExpired) {
+          this.route.navigate(['/home']);
+        } 
+        
+      }
+    });
+
+    this.authService.checkToken();
    this.vistaPassword="password";
    this.iconoPassword="eye-off";
   }
@@ -40,8 +57,10 @@ export class SigninPage implements OnInit {
     this.register();
   }
  
-  register() {
+  register() {  
+    this.authService.presentLoading("Espere por favor");
     this.authService.register(this.credentialsForm.value).subscribe(res => {
+      this.authService.loading.dismiss();
      this.alert();
       // Call Login to automatically login the new user
       //crear alerta advirtiendo de email de verificación con redireccion dandole al ok al login

@@ -32,7 +32,7 @@ export class HomePage implements OnInit {
     this.storage.remove('access_token');
  
     let toast = this.toastController.create({
-      message: 'JWT removed',
+      message: 'logout con éxito',
       duration: 3000
     });
     toast.then(toast => toast.present());

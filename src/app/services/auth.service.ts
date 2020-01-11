@@ -1,4 +1,4 @@
-import { Platform, AlertController } from '@ionic/angular';
+import { Platform, AlertController, LoadingController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -7,37 +7,67 @@ import { environment } from '../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { ok } from 'assert';
- 
+import { Router } from '@angular/router';
+var authenticationState = new BehaviorSubject(null);
 const TOKEN_KEY = 'access_token';
  
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
- 
+export class AuthService  {
+  loading:any;
   url = environment.url;
   user = null;
-  authenticationState = new BehaviorSubject(false);
+  authenticationState = new BehaviorSubject(this. checkTokenInitialize());
  
-  constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
+  constructor(private route:Router, private loadingCtrl:LoadingController, private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
     private plt: Platform, private alertController: AlertController) {
     this.plt.ready().then(() => {
       this.checkToken();
     });
   }
- 
-  checkToken() {
+  
+  ngOnInit(){
+
+  }
+
+  changeState(valor){
+    this.authenticationState.next(valor);
+  }
+  checkTokenInitialize():any{
     this.storage.get(TOKEN_KEY).then(token => {
       if (token) {
         let decoded = this.helper.decodeToken(token);
         let isExpired = this.helper.isTokenExpired(token);
  
-        if (!isExpired) {
+        if (isExpired) {
+          this.storage.remove(TOKEN_KEY);
+         return false;
+        } else {
+          this.user = decoded;
+          return true;
+        }
+        
+      }else{
+        return false;
+      }
+    });
+  }
+  async checkToken() {
+    await this.storage.get(TOKEN_KEY).then(token => {
+      if (token) {
+        let decoded = this.helper.decodeToken(token);
+        let isExpired = this.helper.isTokenExpired(token);
+ 
+        if (isExpired) {
+          this.storage.remove(TOKEN_KEY);
+          this.authenticationState.next(false);
+        } else {
           this.user = decoded;
           this.authenticationState.next(true);
-        } else {
-          this.storage.remove(TOKEN_KEY);
         }
+      }else{
+        this.authenticationState.next(false);
       }
     });
   }
@@ -61,6 +91,7 @@ export class AuthService {
           this.authenticationState.next(true);
         }),
         catchError(e => {
+          this.loading.dismiss();
           this.showAlert(e.error.msg);
           throw new Error(e);
         })
@@ -70,7 +101,10 @@ export class AuthService {
   logout() {
     this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
-    });
+      this.storage.remove(TOKEN_KEY);
+      this.route.navigate(['/login']);
+    return true;
+    }).catch(err=>{return false;});
   }
  
   resetPassword(credentials){
@@ -102,8 +136,9 @@ export class AuthService {
     )
   }
  
-  isAuthenticated() {
-    return this.authenticationState.value;
+  async isAuthenticated() {
+    console.log(this.authenticationState);
+    return await this.authenticationState;
   }
  
   showAlert(msg, header='Error') {
@@ -114,4 +149,15 @@ export class AuthService {
     });
     alert.then(alert => alert.present());
   }
+
+async presentLoading(message:string){
+  this.loading= await this.loadingCtrl.create({
+    message
+  });
+  return this.loading.present();
+}
+async dismissLoading(){
+  return this.loading.dismiss();
+}
+
 }
