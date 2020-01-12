@@ -27,15 +27,18 @@ const routes: Routes = [
   },
   {
     path: 'language',
-    loadChildren: () => import('./pages/language/language.module').then( m => m.LanguagePageModule)
+    loadChildren: () => import('./app/language/language.module').then( m => m.LanguagePageModule),
+    canActivate:[AuthGuardService]
   },
   {
     path: 'policy',
-    loadChildren: () => import('./pages/policy/policy.module').then( m => m.PolicyPageModule)
+    loadChildren: () => import('./pages/policy/policy.module').then( m => m.PolicyPageModule),
+    
   },
   {
     path: 'reset-password',
-    loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule),
+    canActivate:[AuthNotGuardService]
   },
   {
     path: 'tabs',

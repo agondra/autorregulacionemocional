@@ -28,7 +28,8 @@
         }
     },
     "language":{
-        "language":"language",
+    
+        "title":"language",
         "english":"english",
         "spanish":"spanish",
         "changeLanguage": "selected language",
@@ -38,6 +39,18 @@
 
     "resetPassword":{
         "email":"Enter the email "
+    },
+    "more":{
+        "logout":"logout",
+        "language":"language",
+        "title":"more"
+    },
+    "home":{
+        "title":"home"
+    },
+    "tabs":{
+        "more":"more",
+        "home":"home"
     }
 
 

@@ -20,6 +20,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateConfigService } from '../app/services/translate-config.service';
 import {NgxWebstorageModule} from 'ngx-webstorage';
+//componentes creados
+import { ComponentsModule } from './components/components.module';
 
 //traducción
 export function LanguageLoader(http:HttpClient){
@@ -41,6 +43,7 @@ export function jwtOptionsFactory(storage) {
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     HttpClientModule,
+    ComponentsModule,
     NgxWebstorageModule.forRoot(),
     TranslateModule.forRoot({
       loader:{

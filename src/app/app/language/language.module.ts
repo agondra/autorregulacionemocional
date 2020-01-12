@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LanguagePageRoutingModule } from './language-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguagePage } from './language.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { LanguagePage } from './language.page';
     FormsModule,
     IonicModule,
     LanguagePageRoutingModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    ComponentsModule
   ],
   declarations: [LanguagePage]
 })

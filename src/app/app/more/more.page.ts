@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-more',
@@ -6,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./more.page.scss'],
 })
 export class MorePage implements OnInit {
-
-  constructor() { }
+  constructor(private route:Router ,private authService:AuthService, private toastController:ToastController) { }
 
   ngOnInit() {
   }
+  logout() {
+    this.authService.logout();
+    let toast = this.toastController.create({
+      message: 'logout con éxito',
+      duration: 3000
+    });
+    toast.then(toast => toast.present());
+  }
 
+
+  goLanguage(){
+    this.route.navigate(['language']);
+  }
 }

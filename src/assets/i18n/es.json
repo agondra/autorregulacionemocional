@@ -29,7 +29,7 @@
 
     },
     "language":{
-        "language":"idioma",
+        "title":"idioma",
         "english":"ingles",
         "spanish":"español",
         "changeLanguage":"Elige idioma",
@@ -38,7 +38,21 @@
 
     "resetPassword":{
         "email":"Introduce el email "
+    },
+    "more":{
+        "logout":"salir",
+        "language":"idioma",
+        "title":"mas"
+    },
+    "home":{
+        "title":"home"
+    },
+    "tabs":{
+        "more":"mas",
+        "home":"home"
     }
+
+
 
 
 }
