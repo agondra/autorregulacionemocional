@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
         let isExpired = this.helper.isTokenExpired(token);
  
         if (!isExpired) {
-          this.route.navigate(['/home']);
+          this.route.navigate(['/tabs']);
         } 
         
       }
@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
     this.authService.presentLoading("Espere por favor");
     this.authService.login(this.credentialsForm.value).subscribe(()=>{
       this.authService.loading.dismiss();
-      this.route.navigate(['home']);
+      this.route.navigate(['/tabs']);
     },
     (err)=>{
     

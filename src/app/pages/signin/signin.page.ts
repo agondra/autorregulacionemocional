@@ -42,7 +42,7 @@ export class SigninPage implements OnInit {
         let isExpired = this.helper.isTokenExpired(token);
  
         if (!isExpired) {
-          this.route.navigate(['/home']);
+          this.route.navigate(['/tabs']);
         } 
         
       }

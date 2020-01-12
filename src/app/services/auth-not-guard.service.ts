@@ -28,7 +28,7 @@ export class AuthNotGuardService implements CanActivate{
               return true;
             }else{
               console.log("esto es losss qu da",auth.value);
-              this.route.navigate(["/home"]);
+              this.route.navigate(["/tabs"]);
               return false;
             }
           }

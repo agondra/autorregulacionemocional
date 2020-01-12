@@ -38,6 +38,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },
   {
+    path: 'tabs',
+    loadChildren: () => import('./app/tabs/tabs.module').then( m => m.TabsPageModule),
+    canActivate:[AuthGuardService]
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
     canActivate:[AuthNotGuardService]
