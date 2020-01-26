@@ -8,7 +8,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
+//badge
+import { Badge } from '@ionic-native/badge/ngx';
 //autentificación
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Storage, IonicStorageModule } from '@ionic/storage';
@@ -22,6 +23,11 @@ import { TranslateConfigService } from '../app/services/translate-config.service
 import {NgxWebstorageModule} from 'ngx-webstorage';
 //componentes creados
 import { ComponentsModule } from './components/components.module';
+import { BLE } from '@ionic-native/ble/ngx';
+import { LOCALSTORAGE_PROVIDER } from './Util/browser-api';
+
+//Firebase notificaciones
+import { FCM } from '@ionic-native/fcm/ngx';
 
 //traducción
 export function LanguageLoader(http:HttpClient){
@@ -34,9 +40,11 @@ export function jwtOptionsFactory(storage) {
     tokenGetter: () => {
       return storage.get('access_token');
     },
-    whitelistedDomains: [environment.url]
+    whitelistedDomains: ["servidor-proyecto.herokuapp.com"]
   }
 }
+
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -61,7 +69,11 @@ export function jwtOptionsFactory(storage) {
       }
     })],
   providers: [
+    LOCALSTORAGE_PROVIDER,
+    FCM,
+    BLE,
     StatusBar,
+    Badge,
     SplashScreen,
     TranslateConfigService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

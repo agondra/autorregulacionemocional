@@ -24,3 +24,52 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+  .animated.fast {
+    -webkit-animation-duration: 400ms;
+    animation-duration: 400ms;
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+  }
+//TOAST
+  .my-custom-class{
+    --background: rgb(64, 128, 124);
+    --color:rgb(253, 255, 255);
+    --border-style:solid;
+    --border-width :2px;
+    --border-color:rgb(255, 255, 255);
+    --border-radius:10px;
+}
+
+

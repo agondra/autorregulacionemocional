@@ -22,6 +22,12 @@ const routes: Routes = [
 
       },
       {
+        path: 'notification',
+        loadChildren: () => import('../notification/notification.module').then( m => m.NotificationPageModule),
+        canActivate:[AuthGuardService]
+
+      },
+      {
         path: 'more',
         loadChildren: () => import('../more/more.module').then( m => m.MorePageModule),
         canActivate:[AuthGuardService]

@@ -46,6 +46,11 @@ const routes: Routes = [
     canActivate:[AuthGuardService]
   },
   {
+    path: 'notification-detail/:title/:body/:data/:id',
+    loadChildren: () => import('./app/notification-detail/notification-detail.module').then( m => m.NotificationDetailPageModule),
+    canActivate:[AuthGuardService]
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
     canActivate:[AuthNotGuardService]

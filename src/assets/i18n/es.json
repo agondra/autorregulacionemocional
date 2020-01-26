@@ -49,7 +49,12 @@
     },
     "tabs":{
         "more":"mas",
-        "home":"home"
+        "home":"home",
+        "notification":"notificaciones"
+    },
+    "notification":{
+        "delete":"eliminar",
+        "title":"notificaciones"
     }
 
 

@@ -8,6 +8,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { ok } from 'assert';
 import { Router } from '@angular/router';
+import { stringify } from 'querystring';
 var authenticationState = new BehaviorSubject(null);
 const TOKEN_KEY = 'access_token';
  
@@ -80,12 +81,23 @@ export class AuthService  {
       })
     );
   }
- 
+  probarEspecial(){
+    console.log("entra");
+
+    let headerss:string;
+    this.storage.get(TOKEN_KEY).then(token => { headerss=token});
+    
+    
+    return this.http.get(`${this.url}/api/special`).
+    subscribe(res=>{console.log(res['msg'])}, err=>{console.log("slkdjflskd",err['msg'])});
+  }
   login(credentials) {
+ 
     console.log(`${this.url}/api/login`);
     return this.http.post(`${this.url}/api/login`, credentials)
       .pipe(
         tap(res => {
+          console.log(res['token']);
           this.storage.set(TOKEN_KEY, res['token']);
           this.user = this.helper.decodeToken(res['token']);
           this.authenticationState.next(true);
@@ -137,7 +149,7 @@ export class AuthService  {
   }
  
   async isAuthenticated() {
-    console.log(this.authenticationState);
+
     return await this.authenticationState;
   }
  

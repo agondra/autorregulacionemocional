@@ -50,7 +50,12 @@
     },
     "tabs":{
         "more":"more",
-        "home":"home"
+        "home":"home",
+        "notification":"notification"
+    },
+    "notification":{
+        "delete":"delete",
+        "title":"notifications"
     }
 
 

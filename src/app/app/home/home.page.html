@@ -1,10 +1,18 @@
 <app-header titulo="{{'home.title' | translate}}" backButton="no"></app-header>
 
 <ion-content>
-  Bienvenido a la página inicial de este proyecto!
+  
  
-
- 
+<button (click)="scan()" >SDFSDSFFS
+  <ion-icon name="Bluetooth"></ion-icon>
+</button>
+ <ion-list>
+   <ion-card-content *ngFor="let device of devices">
+     <p>{{device.name || 'Unname'}}</p>
+     <p>{{device.id}}</p>
+     <p> RSSI: {{device.rssi}}</p>
+   </ion-card-content>
+ </ion-list>
 
  
 </ion-content>

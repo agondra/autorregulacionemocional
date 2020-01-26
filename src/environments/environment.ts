@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'https://servidor-proyecto.herokuapp.com',
+ // url:"http://localhost:5000",
+ url: 'https://servidor-proyecto.herokuapp.com',
   TOKEN_KEY : 'access_token'
 };
 

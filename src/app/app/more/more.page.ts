@@ -22,7 +22,9 @@ export class MorePage implements OnInit {
     toast.then(toast => toast.present());
   }
 
-
+llamarespecial(){
+  this.authService.probarEspecial();
+}
   goLanguage(){
     this.route.navigate(['language']);
   }

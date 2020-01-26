@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastController } from '@ionic/angular';
+import { BLE } from '@ionic-native/ble/ngx';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +9,8 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  constructor(private toastController:ToastController, private authService: AuthService) { }
+devices:any[]=[];
+  constructor(private ngZone:NgZone, private ble:BLE, private toastController:ToastController, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -22,4 +23,19 @@ export class HomePage implements OnInit {
     });
     toast.then(toast => toast.present());
   }
+
+  scan(){
+    this.devices=[];
+    this.ble.scan([],15).subscribe(device=>this.onDeviceDiscovered(device));
+  }
+
+  onDeviceDiscovered(device){
+    console.log('Discovered'+JSON.stringify(device, null, 2));
+    this.ngZone.run(()=>{
+      this.devices.push(device);
+      console.log(device);
+    });
+  }
+
+
 }
