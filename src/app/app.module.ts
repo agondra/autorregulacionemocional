@@ -34,6 +34,10 @@ export function LanguageLoader(http:HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+//encriptacion
+import { AES256 } from '@ionic-native/aes-256/ngx';
+
+
 //autentificacion
 export function jwtOptionsFactory(storage) {
   return {
@@ -70,6 +74,7 @@ export function jwtOptionsFactory(storage) {
     })],
   providers: [
     LOCALSTORAGE_PROVIDER,
+    AES256,
     FCM,
     BLE,
     StatusBar,
