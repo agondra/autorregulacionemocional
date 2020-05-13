@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import * as aesjs from 'aes-js';
 //import * as AES from 'crypto-js/aes';
 //import * as Cipher from 'aes-ecb';
-
+import { AlertController } from '@ionic/angular';
 import * as concat from 'arraybuffer-concat';
 
 @Component({
@@ -23,22 +23,73 @@ export class HomePage implements OnInit {
   id="";
   buttonState=0;
   conectado;
-
+  idDevice="0";
   key = new Uint8Array([0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x40, 0x41, 0x42,
 0x43, 0x44, 0x45]);
   key2;
   buffer;
-  constructor(private ngZone:NgZone, private aes256: AES256, private ble:BLE, private toastController:ToastController, private authService: AuthService) { }
+  constructor(public alertController: AlertController, private ngZone:NgZone, private aes256: AES256, private ble:BLE, private toastController:ToastController, private authService: AuthService) { }
 
   ngOnInit() {
-  
+  //this.ble.isEnabled().then(data=>{}).catch(()=>{this.presentAlert()})
   
     //console.log(Cipher.encrypt(this.key2, "Secret Passphrase"));
 
   }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header:'e ' ,
+      subHeader: 'Subtitle',
+      message: 'This is an alert message.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
   ver(){
   this.buffer=this.key.buffer;
    this.key2=this.bytesToString(this.buffer);
+  
+
+      let medirPulso = new Uint8Array([0x15, 0x02, 0x01]).buffer;
+      
+    this.ble.write(this.idDevice,"180d","2a39",medirPulso).then(data=>console.log(data)).catch(err=>console.log(err));
+
+   this.ble.startNotification(this.idDevice,"180d","2a37").subscribe(
+      data => {
+      console.log("ha entrado");
+      console.log("control",data);
+     },
+      (err) => console.log('Unexpected Error Failed to subscribe for button state changes',err)
+      );
+
+/*
+   this.ble.read(this.idDevice,"fee0","00000006-0000-3512-2118-0009af100700").
+                then(
+                (data)=>{
+                    let dataf=new Uint8Array(data);
+                    console.log("data:", dataf);
+                }
+                ).catch(
+                (err)=>{
+                    console.log(err);
+                }
+                );
+
+                this.ble.read(this.idDevice,"fee0","00000007-0000-3512-2118-0009af100700").
+                then(
+                (data)=>{
+                    let dataf=new Uint8Array(data);
+                    console.log("data:", dataf);
+                }
+                ).catch(
+                (err)=>{
+                    console.log(err);
+                }
+                );
    /*
    console.log(this.key2);
    (window as any).global = window;
@@ -105,6 +156,7 @@ export class HomePage implements OnInit {
 
     this.ble.connect(device.id).subscribe(
         data => {
+            console.log("datos de la pulsera a la que conectas",data);
             console.log("conectado");
             this.conectado=true;
             console.log("vinculando....");
@@ -126,6 +178,7 @@ export class HomePage implements OnInit {
                 }
                if (data[1]==0x03){
                     console.log("ha finalizado");
+                    this.idDevice=device.id;
                     this.ble.stopNotification(device.id,'fee1','00000009-0000-3512-2118-0009af100700').then(data=>console.log("Se han apagado las notificaciones con éxito",data)).catch(err=>console.log("Error en la desactivación de notificaciones",err));
                    /* let datos = new Uint8Array(3);
                     datos[0]=0x15;
@@ -139,13 +192,6 @@ export class HomePage implements OnInit {
                     error=>{
                         console.log("error->",error);
                     });*/
-
-                    this.ble.startNotification(device.id,"180d","2a37").subscribe(
-                          data => {
-                          console.log("ha entrado");
-                          this.onButtonStateChange(data);},
-                          (err) => console.log('Unexpected Error Failed to subscribe for button state changes',err)
-                        );
                 }
                 if(data[1]=0x02){
                     console.log("en medio");
@@ -366,7 +412,7 @@ console.log("resultado", this.bytesToString(buffer).replace(/\s+/g, " "));
     );
   }
 
- /* ionViewWillLeave(){
+  ionViewWillLeave(){
     console.log("desconectando");
     this.ble.disconnect(
         this.peripheral.id
@@ -376,7 +422,7 @@ console.log("resultado", this.bytesToString(buffer).replace(/\s+/g, " "));
     );
   }
 
-  */
+  
 
 }
 

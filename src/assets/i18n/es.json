@@ -50,11 +50,15 @@
     "tabs":{
         "more":"mas",
         "home":"home",
-        "notification":"notificaciones"
+        "notification":"notificaciones",
+        "ritmoCardiaco":"Ritmo cardíaco"
     },
     "notification":{
         "delete":"eliminar",
         "title":"notificaciones"
+    },
+    "ritmocardiaco":{
+        "title":"Ritmo Cardíaco"
     }
 
 

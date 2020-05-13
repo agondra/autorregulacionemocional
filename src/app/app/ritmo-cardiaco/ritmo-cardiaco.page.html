@@ -1,0 +1,52 @@
+<app-header titulo="{{'ritmocardiaco.title' | translate}}" backButton="no"></app-header>
+
+<ion-content>
+    <div class="contenedor">
+            
+            <div class="contenedorpulsera" *ngIf="enable==false">
+                    <div class="led-red"></div>
+                <div  class="warning" >Debes activar el bluetooth para utilizar esta característica</div>
+                <div class="img"> 
+                    <img src="../../../assets/pulserabluetooth.png" alt="Pulsera" width="300" height="330" (click)="bluetoothConnect()">
+                    
+                 </div>
+                 
+            </div>
+
+            <div class="contenedorpulsera" *ngIf="enable==true && myband==false" >
+                    <div class="led-red"></div>
+                    <div  class="warning" >Pulsa la imagen para buscar tu dispositivo myband</div>
+                    <div class="img"> 
+                            <img src="../../../assets/pulseraemparejar.png" alt="Pulsera" width="300" height="330" (click)="openModal()">
+                            
+                         </div>
+                </div>
+                <div class="contenedorpulsera" *ngIf="enable==true && emparejando==false && myband==true">
+                        <div class="contenedoremparejando">
+                            <div class="lds-hourglass"></div>
+                            <div  class="emparejando" >Emparejando...</div>
+                            
+                      </div>
+                      <div class="img"> 
+                            <img src="../../../assets/logo/icono.png" alt="Pulsera" width="300" height="330">
+                            
+                         </div>
+                        </div>
+
+                        <div class="contenedorpulsera" *ngIf="enable==true && emparejando==true && myband==true">
+                                <div class="contenedoremparejando">
+                                    
+                                    <div  class="emparejando" >Emparejada</div>
+                                    
+                              </div>
+                                </div>
+
+                       <!-- <div class="contenedorpulsera" *ngIf="enable==true && emparejando==true && myband==true">
+                                <div class="contenedoremparejando">
+                                    <div class="lds-hourglass"></div>
+                                    <div  class="emparejando" >Emparejando...</div>
+                              </div>
+                            </div>-->
+
+    </div>
+</ion-content>

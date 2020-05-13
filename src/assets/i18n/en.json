@@ -51,11 +51,15 @@
     "tabs":{
         "more":"more",
         "home":"home",
-        "notification":"notification"
+        "notification":"notification",
+        "ritmoCardiaco":"Heart Rate"
     },
     "notification":{
         "delete":"delete",
         "title":"notifications"
+    },
+    "ritmocardiaco":{
+        "title":"Heart rate"
     }
 
 
