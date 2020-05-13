@@ -33,13 +33,22 @@
                          </div>
                         </div>
 
-                        <div class="contenedorpulsera" *ngIf="enable==true && emparejando==true && myband==true">
-                                <div class="contenedoremparejando">
-                                    
-                                    <div  class="emparejando" >Emparejada</div>
-                                    
-                              </div>
-                                </div>
+                      
+                                <div class="contenedorpulsera" *ngIf="enable==true && emparejando==true && myband==true" >
+                               
+                                        <div class="contenedoremparejandof">
+                                                <div class="contenedorpulseraconectada">
+                                                        
+                                                        <div class="img"> 
+                                                                <img src="../../../assets/emparejada.png" alt="Pulsera" width="32" height="32">
+                                                                
+                                                             </div>
+                                                    </div>
+                                                <div  class="emparejando" >Emparejada</div>
+                                               </div>
+                                               <div class="botonCardiaco"> <ion-button (click)="leerRitmoCardiaco()">Iniciar medida</ion-button></div>
+                                          
+                                            </div>
 
                        <!-- <div class="contenedorpulsera" *ngIf="enable==true && emparejando==true && myband==true">
                                 <div class="contenedoremparejando">

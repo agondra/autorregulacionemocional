@@ -62,6 +62,8 @@ export class HomePage implements OnInit {
       data => {
       console.log("ha entrado");
       console.log("control",data);
+      this.ble.stopNotification(this.idDevice,"180d","2a37").then(data=>console.log("Se han apagado las notificaciones cardiacas con éxito",data)).catch(err=>console.log("Error en la desactivación de notificaciones",err));
+                 
      },
       (err) => console.log('Unexpected Error Failed to subscribe for button state changes',err)
       );

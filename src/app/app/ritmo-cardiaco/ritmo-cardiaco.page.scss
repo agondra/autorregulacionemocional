@@ -55,7 +55,7 @@
     display:flex;
     flex-direction:row;
     justify-content: center;
-    margin-top:20px;
+    margin-top:0px;
     
 }
 .warning{
@@ -67,16 +67,26 @@
 }
 .contenedoremparejando{
     width:100%;
-    height: 300px;
+    height: 150px;
     display:flex;
     justify-content: center;
     align-items:center;
     
 }
+
+.contenedoremparejandof{
+    width:100%;
+    height: 150px;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    margin-top:-60px;
+    
+}
 .emparejando{
 
  
-    color:darkslategray;
+    color:rgb(58, 189, 206);
 }
 .led-blue {
     margin: 20px auto;
@@ -95,6 +105,13 @@
     box-shadow: #000 0 -1px 7px 1px, inset #600 0 -1px 9px, #F00 0 2px 12px;
 }
 
+.contenedorpulseraconectada{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-start;
+ 
+
+}
 img:active{
     border:1px solid green;
     background-color:lightgreen;

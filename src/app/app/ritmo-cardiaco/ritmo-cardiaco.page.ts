@@ -15,6 +15,7 @@ export class RitmoCardiacoPage implements OnInit {
   device;
   enable=false;
   idDevice;
+  ritmocardiacoactual=0;
   key = new Uint8Array([0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x40, 0x41, 0x42,
     0x43, 0x44, 0x45]);
   key2;
@@ -111,7 +112,23 @@ export class RitmoCardiacoPage implements OnInit {
   
   }
 
+leerRitmoCardiaco(){
+  let medirPulso = new Uint8Array([0x15, 0x02, 0x01]).buffer;
+      
+  this.ble.write(this.idDevice,"180d","2a39",medirPulso).then(data=>console.log(data)).catch(err=>console.log(err));
 
+   this.ble.startNotification(this.idDevice,"180d","2a37").subscribe(
+    data => {
+    console.log("control",data);
+    let dato= new Uint8Array(data);
+    this.ritmocardiacoactual=dato[1];
+    console.log("data 2",this.ritmocardiacoactual);
+    this.ble.stopNotification(this.idDevice,"180d","2a37").then(data=>console.log("Se han apagado las notificaciones cardiacas con éxito",data)).catch(err=>console.log("Error en la desactivación de notificaciones",err));
+               
+   },
+    (err) => console.log('Unexpected Error Failed to subscribe for button state changes',err)
+    );
+}
 
   deviceSelected(device){
     this.ble.isEnabled().then(data=>{this.enable=true;}).catch(()=>{this.myband=false;this.enable=false;this.emparejando=false;})
@@ -153,7 +170,7 @@ export class RitmoCardiacoPage implements OnInit {
                     this.myband=true;    
                    });   
                    
-                    this.presentToast("<img src='../../../assets/ok.png' alt='Pulsera' width='60px' height='60px'> MyBand emparejada con éxito");
+                    this.presentToast("<img src='../../../assets/ok.png' alt='Pulsera' width='32' height='32'> &nbsp; MyBand emparejada con éxito");
                     this.ble.stopNotification(device.id,'fee1','00000009-0000-3512-2118-0009af100700').then(data=>console.log("Se han apagado las notificaciones con éxito",data)).catch(err=>console.log("Error en la desactivación de notificaciones",err));
           
                 }
@@ -195,7 +212,7 @@ let bytesencriptados = aesEcb.encrypt(data.slice(3,19));
         this.ngZone.run(()=>{
           this.emparejando=false;
                 this.myband=false;
-                this.presentToast("<img src='../../../assets/pulserabluetooth.png' alt='Pulsera' width='60px' height='60px' >No se ha podido emparejar con la pulsera");
+                this.presentToast("<img src='../../../assets/x.png' alt='Pulsera' width='32' height='32'>&nbsp;No se ha podido emparejar con la pulsera");
         });   
       }
 
