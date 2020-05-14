@@ -73,3 +73,16 @@
 }
 
 
+ion-toggle {
+  --background: rgb(147, 182, 221);
+  --background-checked: #2391bd;
+
+  --handle-background: #b1d8f1;
+  --handle-background-checked: rgb(240, 134, 12);
+  top:-10px;
+
+  --handle-box-shadow: 4px 0 2px 0 red;
+
+
+}
+

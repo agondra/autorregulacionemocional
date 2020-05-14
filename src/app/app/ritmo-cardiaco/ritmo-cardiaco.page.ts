@@ -10,6 +10,7 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./ritmo-cardiaco.page.scss'],
 })
 export class RitmoCardiacoPage implements OnInit {
+  comenzar=false;
   emparejando=false;
   myband=false;
   device;
@@ -20,6 +21,7 @@ export class RitmoCardiacoPage implements OnInit {
     0x43, 0x44, 0x45]);
   key2;
   buffer;
+  parar;
   constructor(private toastController: ToastController, public alertController: AlertController, private modalCtrl:ModalController,private ble:BLE, private ngZone:NgZone) { }
 
   ngOnInit() {
@@ -112,7 +114,25 @@ export class RitmoCardiacoPage implements OnInit {
   
   }
 
+leerRit(){
+ 
+  if(this.comenzar){
+    this.leerRitmoCardiaco();
+    this.parar=setInterval(() => {
+      this.leerRitmoCardiaco();
+     },10000);
+    
+  }else{
+   
+    clearInterval(this.parar);
+  
+  }
+
+}
+  
 leerRitmoCardiaco(){
+
+  if (this.comenzar){
   let medirPulso = new Uint8Array([0x15, 0x02, 0x01]).buffer;
       
   this.ble.write(this.idDevice,"180d","2a39",medirPulso).then(data=>console.log(data)).catch(err=>console.log(err));
@@ -121,13 +141,17 @@ leerRitmoCardiaco(){
     data => {
     console.log("control",data);
     let dato= new Uint8Array(data);
-    this.ritmocardiacoactual=dato[1];
+    this.ngZone.run(()=>{
+      this.ritmocardiacoactual=dato[1];    
+   });  
+    
     console.log("data 2",this.ritmocardiacoactual);
     this.ble.stopNotification(this.idDevice,"180d","2a37").then(data=>console.log("Se han apagado las notificaciones cardiacas con éxito",data)).catch(err=>console.log("Error en la desactivación de notificaciones",err));
                
    },
     (err) => console.log('Unexpected Error Failed to subscribe for button state changes',err)
     );
+  }
 }
 
   deviceSelected(device){
