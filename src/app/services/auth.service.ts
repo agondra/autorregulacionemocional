@@ -248,4 +248,8 @@ getMedidas(){
   return this.http.get(`${this.url}/api/medidas`);
 }
 
+getTCMedio(){
+  return this.http.get(`${this.url}/api/TCMedio`);
+}
+
 }

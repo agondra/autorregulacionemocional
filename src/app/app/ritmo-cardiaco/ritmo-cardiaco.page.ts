@@ -35,6 +35,10 @@ import {
   
 })
 export class RitmoCardiacoPage implements OnInit {
+  rojo:boolean;
+  azul:boolean;
+  verde:boolean;
+  tcmedio:number=0;
   inspira:boolean;
   audio=new Audio();
   respiracion;
@@ -65,11 +69,15 @@ export class RitmoCardiacoPage implements OnInit {
   slide1 = false;
   slide2 = false;
   slide3 = false;
+  slide4 = false;
   
   constructor(private ConexionBand:ConexionmybandService, private auth:AuthService, private toastController: ToastController, public alertController: AlertController, private modalCtrl: ModalController, private ble: BLE, private ngZone: NgZone) { }
 
   ngOnInit() {
-    this.ngZone.run(()=>{this.estado='inactivo';this.inspira=true;this.card1=true; this.card2=true;this.card3=true;});
+    this.ngZone.run(()=>{this.azul=false;
+      this.verde=false;
+      this.rojo=true;
+      this.estado='inactivo';this.inspira=true;this.card1=true; this.card2=true;this.card3=true;});
     this.ConexionBand.myband.subscribe(data=>{
       this.ngZone.run(()=>{
         this.myband=data;
@@ -187,7 +195,7 @@ export class RitmoCardiacoPage implements OnInit {
         text: 'cancel',
         role: 'cancel',
         handler: blah => {
-          console.log('Confirm Cancel: blah');
+         
           this.myband = false;
           this.enable = false;
          
@@ -242,7 +250,30 @@ export class RitmoCardiacoPage implements OnInit {
   }
 
   leerRit() {
-    this.ngZone.run(()=>{ this.ConexionBand.ritmocardiacoactual.subscribe(data=>{console.log(data);this.ritmocardiacoactual.push(data);console.log("......>"+this.ritmocardiacoactual[this.cont]);this.cont++;});});
+    this.ngZone.run(()=>{ this.ConexionBand.ritmocardiacoactual.subscribe(data=>{
+      console.log("estes es el dato",data);
+      if (data!=0){
+      if (this.tcmedio+5<data){
+        this.rojo=true;
+        this.verde=false;
+        this.azul=false;
+      }else if(this.tcmedio==data || (this.tcmedio+5>data && this.tcmedio<data)){
+        this.verde=true;
+        this.rojo=false;
+        this.azul=false;
+
+      }else if(this.tcmedio>data){
+        this.azul=true;
+        this.rojo=false;
+        this.verde=false;
+      }
+    }
+     
+      this.ritmocardiacoactual.push(data);
+      this.cont++;
+    });
+     
+    });
   
     
        
@@ -430,9 +461,30 @@ siguiente() {
     this.slide3 = true;
     this.reproducir();
     this.cambio();
+  
+    this.auth.getTCMedio().subscribe(data => {
+       this.ngZone.run(() => {
+      let aux;
+      aux = data;
+      this.tcmedio = aux.tcMedio;
+    });});
     this.leerRit(); 
     this.respiracion=setInterval(()=>{this.cambio();this.inspira=!this.inspira;},4000);
-    setTimeout(()=>{clearInterval(this.respiracion);this.audio.pause();},90000);
+    setTimeout(()=>{
+      clearInterval(this.respiracion);
+      this.audio.pause();
+      console.log("este es el ritmo cardiaco",this.ritmocardiacoactual);
+      this.auth.setMedida(this.ritmocardiacoactual[1], this.ira, this.tristeza, this.miedo, this.preocupacion, this.impulsividad).
+      subscribe(() => { console.log("Introducida la medida correctamente") },
+        (err) => { console.log("error al introducir la medida correcta", err) });
+
+        this.ngZone.run(() => {
+          
+          this.slide3 = false;
+          this.slide4 = true;
+        });
+      
+    },90000);
   } else {
     this.slide1 = false;
     this.slide2 = false;

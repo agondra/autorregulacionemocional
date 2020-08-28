@@ -1,31 +1,87 @@
+
 <app-header titulo="{{'home.title' | translate}}" backButton="no"></app-header>
 
-<ion-content>
-  
- 
-<button (click)="scan()" >{{key2}}
-  <ion-icon name="Bluetooth"></ion-icon>
-</button>
-
-<button (click)="ver()" >eeee{{key2}}
-  <ion-icon name="Bluetooth"></ion-icon>
-</button>
 
 
- <ion-list>
-   <ion-card-content *ngFor="let device of devices" (click)="deviceSelected(device)">
-     <p>{{device.name || 'Unname'}}</p>
-     <p>{{device.id}}</p>
-     <p> RSSI: {{device.rssi}}</p>
-   </ion-card-content>
+  <ion-content color="light">
+    <ion-refresher slot="fixed" (ionRefresh)="refresco($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+      
+    <ion-card color="blanco" class="cardcontent">
+      <ion-card-header  class="title" (click)="contenido=!contenido">
+        <ion-card-subtitle>   
+                                      
+        </ion-card-subtitle>
+        <ion-card-title><p class="title">¿Qué es la autorregulación emocional?</p></ion-card-title>
+      </ion-card-header>
+      <ion-card-content *ngIf="contenido">
+       <p class="contenido"> El autocontrol emocional es por tanto una herramienta muy necesaria a la hora de enfrentarse con el mundo. Un manejo óptimo de las emociones nos permitiría cambiar una vivencia estresante  e incontrolable de una situación, en una vivenciada como desagradable pero pasajera e impersonal y he ahí donde estamos siendo conscientes de aquello que nos sucede y de cómo queremos que nos suceda.
+      </p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card color="blanco" class="cardcontent">
+      <ion-card-header  class="title" (click)="contenido2=!contenido2">
+        <ion-card-subtitle>   
+                                      
+        </ion-card-subtitle>
+        <ion-card-title><p class="title">7 maneras de afrontar el estrés emocional</p></ion-card-title>
+      </ion-card-header>
+      <ion-card-content *ngIf="contenido2">
+       <p class="contenido"> 
+         <strong>Aprender a delegar</strong><br/>
+        Quien mucho abarca, poco aprieta, dice el refrán. Es importante traspasar tareas a las personas con las que convivimos cuando tenemos muchas cosas encima.
+        <br/>
+        <strong>Saber decir no</strong><br/>
+        No siempre tenemos que realizar acciones que no nos apetece realizar. Sin dañar a los demás, eso es importante. Entrena tu faceta asertiva.
+        <br/>
+        <strong> Enfocar desde fuera</strong><br/>
+        Desde una perspectiva fuera de lo personal las cosas se ven de diferente manera. Tu mente se va a centrar en aquello que pones tu atención, si te fijas en lo negativo tu estado emocional será negativo.
+        <br/>
+        <strong> Detener el pensamiento</strong><br/>
+        Para un momento y fíjate en lo que estás pensando, sobre todo si entras en un bucle mental. Detén tus pensamientos un momento y respira o cambia la atención.
+        <br/>
+        <strong> Afirmaciones en positivo</strong><br/>
+        Si cambias el foco de tu atención a soluciones con optimismo, tu mente también lo hará.
+        <br/>
+        <strong> Ensayar mentalmente </strong><br/>
+        Ante un problema, recrea la situación con el objetivo de que todo va a salir bien. Imagina incluso los detalles de cómo vas a solucionar ese problema, dirige la situación. Y cuando estés satisfecho, guarda esa película en tu cabeza y evócala cuando la necesites.
+        <br/>
+        <strong>  Cambiar la perspectiva de las situaciones </strong><br/>
+        Cada persona tiene una experiencia diferente de las situaciones que vive porque sus opiniones o valoraciones se han formado con vivencias diferentes a las tuyas. Aceptar esto, es el primer paso para cambiar de perspectiva.
+       </p>
 
-    <ion-card-content *ngFor="let device of devices" (click)="deviceSelected(device)">
-     <p>{{device.name || 'Unname'}}</p>
-     <p>{{device.id}}</p>
-     <p> RSSI: {{device.rssi}}</p>
-   </ion-card-content>
- </ion-list>
+      </ion-card-content>
+    </ion-card>
+   
+    <ion-list-header class="welcome-card" color="light">Estadísticas de tus últimas mediciones:</ion-list-header>
+    <ion-card  color="blanco" >
+      <ion-card-header>
+        <ion-card-subtitle>   
+                                      
+        </ion-card-subtitle>
+        <ion-card-title class="welcome-card">Gráfica de pulsaciones</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #barChart></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list-header class="welcome-card" color="light">Emociones más elegidas</ion-list-header>
+    <ion-card color="blanco">
+      <ion-card-header>
+        <ion-card-subtitle>   
+                                      
+        </ion-card-subtitle>
+        <ion-card-title class="welcome-card">Gráfica de emociones</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #hrzBars2></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    
+  </ion-content>
 
 
- 
-</ion-content>
+

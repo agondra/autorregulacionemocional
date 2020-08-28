@@ -219,7 +219,7 @@
                                         <div class="inspira" *ngIf="!inspira">Expira ..</div>
                                         <div class="barracirculo">
                                            
-                                        <div class="circulo" [@estado]="estado">
+                                        <div class="circulo"  [ngClass]="{'rojo': rojo, 'verde': verde, 'azul': azul}" [@estado]="estado">
                                        </div>
                                        
                                        </div>
@@ -231,6 +231,71 @@
                         
 
                 </div>
+
+                <div class="slide" *ngIf="slide4">
+                        <div class="contenedor" *ngIf="verde" >
+                                <div class="formulario">
+                                        <div class="contenedorimagen">
+
+                                        </div>
+
+                                        <div class="texto">
+                                            Hemos conseguido que te bajes las pulsaciones y te tranquilices, aunque no hemos conseguido que llegues
+                                            al estado óptimo.
+                                        </div>
+                                       
+                                </div>
+
+                        </div>
+                        <div class="boton">
+                                <ion-button (click)="siguiente()">
+                                        Continuar
+                                        <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
+                                </ion-button>
+                        </div>
+                        <div class="contenedor" *ngIf="azul" >
+                                <div class="formulario">
+                                        <div class="contenedorimagen">
+
+                                        </div>
+
+                                        <div class="texto">
+                                           Felicidades, hemos conseguido bajar al estado óptimo!
+                                        </div>
+                                       
+                                </div>
+
+                        </div>
+                        <div class="boton">
+                                <ion-button (click)="siguiente()">
+                                        Continuar
+                                        <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
+                                </ion-button>
+                        </div>
+                        
+                        <div class="contenedor" *ngIf="verde" >
+                                <div class="formulario">
+                                        <div class="contenedorimagen">
+
+                                        </div>
+
+                                        <div class="texto">
+                                            Lamentablemente no hemos podido controlar tu estado, sería aconsejable que volvieras a hacer el ejercicio con mayor concentración.
+                                            Intenta aislarte para poder estar al 100%.
+                                        </div>
+                                       
+                                </div>
+
+                        </div>
+                        <div class="boton">
+                                <ion-button (click)="siguiente()">
+                                        Continuar
+                                        <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
+                                </ion-button>
+                        </div>
+
+                </div>
+                
         </div>
 
 
