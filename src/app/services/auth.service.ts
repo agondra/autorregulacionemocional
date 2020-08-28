@@ -82,7 +82,7 @@ export class AuthService  {
     );
   }
   probarEspecial(){
-    console.log("entra");
+ 
 
     let headerss:string;
     this.storage.get(TOKEN_KEY).then(token => { headerss=token});
@@ -170,6 +170,82 @@ async presentLoading(message:string){
 }
 async dismissLoading(){
   return this.loading.dismiss();
+}
+
+mybandBD(id, secretKey){
+  let myband={
+    "deviceMyBand":id,
+    "secretKey":secretKey
+  }
+  return this.http.post(`${this.url}/api/myband`, myband)
+  .pipe(
+    tap(res => {
+      console.log("datos de la my band en bd",res)
+    }),
+    catchError(e => {
+      console.log("Error al añadir los datos de la my band",e);
+      throw new Error(e);
+    })
+  );
+
+}
+
+setDataUser(sexo, altura, peso, deporte,tcmedio){
+
+  let data={
+    "sexo":sexo,
+    "altura":altura,
+    "peso":peso,
+    "deporte":deporte,
+    "tcmedio":tcmedio
+  }
+  return this.http.post(`${this.url}/api/formularioInicial`, data)
+  .pipe(
+    tap(res => {
+      console.log("datos de usuario en la bd",res)
+    }),
+    catchError(e => {
+      console.log("Error al añadir los datos del usuario en la bd",e);
+      throw new Error(e);
+    })
+  );
+
+}
+
+setMedida(tc,ira,tristeza,miedo,preocupacion,impulsividad){
+
+  let data={
+    "tc":tc,
+    "ira":ira,
+    "tristeza":tristeza,
+    "miedo":miedo,
+    "preocupacion":preocupacion,
+    "impulsividad":impulsividad
+  }
+  return this.http.post(`${this.url}/api/medida`, data)
+  .pipe(
+    tap(res => {
+      console.log("datos de la medida introducidos con éxito",res)
+    }),
+    catchError(e => {
+      console.log("Error al añadir los datos de la medida en la bd",e);
+      throw new Error(e);
+    })
+  );
+
+}
+
+getMyBand(){
+  return this.http.get(`${this.url}/api/myband`);
+}
+
+getFirstConexion(){
+  return this.http.get(`${this.url}/api/firstConexion`);
+}
+
+
+getMedidas(){
+  return this.http.get(`${this.url}/api/medidas`);
 }
 
 }

@@ -18,3 +18,228 @@
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
+<div class="slides" *ngIf="first">
+  <div class="slide" *ngIf="slide1">
+    <div class="contenedor">
+      <div class="formulario">
+        <div class="contenedorimagen">
+
+        </div>
+
+        <div class="texto">
+          Cuestionario previo
+        </div>
+        <div class="contenedorinput">
+          <div class="inputs">
+            <ion-label>Sexo:</ion-label>&nbsp;
+
+            <input type="radio" [(ngModel)]="sexo" name="sexo" value="M" /> Varón &nbsp;
+
+            <input type="radio" [(ngModel)]="sexo" name="sexo" value="F" /> Mujer
+          </div>
+          <div class="inputs">
+            <ion-label>Altura:</ion-label>&nbsp;
+            <select name="nombre" [(ngModel)]="altura">
+              <option *ngFor="let altura of alturas" name="alturaF" value="{{altura}}">{{altura}}</option>
+            </select><br />
+          </div>
+          <div class="inputs">
+            <ion-label> Peso:</ion-label>&nbsp;
+            <select name="nombre" [(ngModel)]="peso">
+              <option *ngFor="let peso of pesos" name="pesoF" value="{{peso}}">{{peso}}</option>
+            </select><br />
+          </div>
+          <div class="inputs">
+            <ion-label> Realizas deporte <br /> habitualmente:</ion-label>&nbsp;
+
+            <input type="radio" [(ngModel)]="deporte" name="deporte" value="si" /> &nbsp; Si&nbsp;
+
+            <input type="radio" [(ngModel)]="deporte" name="deporte" value="no" /> &nbsp; No
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="boton">
+      <ion-button (click)="siguiente()" [disabled]="sexo=='' || altura=='' || peso=='' || deporte==''">
+        Continuar
+        <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="relleno"></div>
+  </div>
+
+
+  <div class="slide" *ngIf="slide2">
+
+    <div class="contenedor">
+      <div class="formulario">
+        <div class="contenedorimagen">
+
+        </div>
+
+        <div class="texto">
+          Elige la Emocion o malestar:
+        </div>
+        <div class="contenedorinput">
+          <div class="inputs">
+            <ion-label><input type="checkbox" [(ngModel)]="ira" value="first_checkbox">&nbsp;Ira/cólera</ion-label>
+
+          </div>
+          <div class="inputs">
+            <ion-label><input type="checkbox" [(ngModel)]="tristeza" value="first_checkbox">&nbsp;Tristeza</ion-label>
+
+          </div>
+          <div class="inputs">
+            <ion-label><input type="checkbox" [(ngModel)]="miedo" value="first_checkbox">&nbsp;Miedo</ion-label>
+
+          </div>
+          <div class="inputs">
+            <ion-label><input type="checkbox" [(ngModel)]="preocupacion"
+                value="first_checkbox">&nbsp;Rumiación/Preocupación</ion-label>
+
+          </div>
+          <div class="inputs">
+            <ion-label><input type="checkbox" [(ngModel)]="impulsividad" value="first_checkbox">&nbsp;Impulsividad
+              incontrolable</ion-label>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="boton">
+      <ion-button (click)="siguiente()"
+        [disabled]="ira=='' && tristeza=='' && miedo=='' && preocupacion=='' && impulsividad==''">
+        Continuar
+        <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="relleno"></div>
+  </div>
+  <div class="slide" *ngIf="slide3">
+    <div class="contenedor">
+      <div class="contenedor2">
+
+        <div class="contenedorpulsera" *ngIf="enable==false">
+          <div class="led-red"></div>
+          <div class="warning">Debes activar el bluetooth para utilizar esta característica</div>
+          <div class="img">
+            <img src="../../../assets/pulserabluetooth.png" alt="Pulsera" width="300" height="330"
+              (click)="bluetoothConnect()">
+
+          </div>
+
+        </div>
+
+        <div class="contenedorpulsera" *ngIf="enable==true && myband==false">
+          <div class="led-red"></div>
+          <div class="warning">Pulsa la imagen para buscar tu dispositivo myband</div>
+          <div class="img">
+            <img src="../../../assets/pulseraemparejar.png" alt="Pulsera" width="300" height="330"
+              (click)="openModal()">
+
+          </div>
+        </div>
+        <div class="contenedorpulsera" *ngIf="enable==true && emparejando==false && myband==true">
+          <div class="contenedoremparejando">
+            <div class="lds-hourglass"></div>
+            <div class="emparejando">Emparejando...</div>
+
+          </div>
+          <div class="img">
+            <img src="../../../assets/logo/icono.png" alt="Pulsera" width="300" height="330">
+
+          </div>
+        </div>
+
+
+        <div class="contenedorpulsera" *ngIf="enable==true && emparejando==true && myband==true">
+          <div class="formulario">
+            <div class="contenedorimagen">
+    
+            </div>
+    
+            <div class="texto" *ngIf="!finmedicion">
+              Por último vamos a hacer una medición de tu ritmo cardíaco en reposo, por favor cuando creas que estás tranquilo presiona el botón de medición, tarda unos pocos segundos.
+            </div>
+            <div class="texto" *ngIf="finmedicion">
+              Perfecto! ya hemos acabado, pulsa el botón de siguiente para acceder a la app.
+            </div>
+            <div class="contenedorinput">
+    
+            </div>
+    
+          </div>
+          
+          <div class="contenedoremparejandof">
+            
+            <div class="contenedorpulseraconectada">
+              
+              <div class="img">
+                <img src="../../../assets/emparejada.png" alt="Pulsera" width="32" height="32">
+
+              </div>
+            </div>
+            <div class="emparejando">Emparejada</div>
+            <div *ngIf="comienzo" class="lds-heart">
+              <div></div>
+            </div>
+            </div>
+        </div>
+        <!-- <div class="contenedorpulsera" *ngIf="enable==true && emparejando==true && myband==true">
+                        <div class="contenedoremparejando">
+                            <div class="lds-hourglass"></div>
+                            <div  class="emparejando" >Emparejando...</div>
+                      </div>
+                    </div>-->
+
+      </div>
+    </div>
+
+
+  
+    <div class="boton" *ngIf="emparejando==true">
+      <div *ngIf="comienzo" class="emparejando">Midiendo, por favor espera ...</div>
+        
+      <ion-button (click)="leerRit()"  *ngIf="!finmedicion && !comienzo">
+        comenzar
+        <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
+      </ion-button>
+      <ion-button  (click)="irapp()" *ngIf="finmedicion">
+        Ir a la app
+        <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="relleno"></div>
+  </div>
+
+
+</div>
+
+
+
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom" color="colorbasico">
+    <ion-tab-button tab="home">
+      <ion-icon name="book"></ion-icon>
+      <ion-label>{{'tabs.home' | translate}}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="ritmo-cardiaco">
+      <ion-icon name="heart"></ion-icon>
+      <ion-label>{{'tabs.ritmoCardiaco' | translate}}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="notification">
+      <ion-icon name="notifications"></ion-icon>
+      <ion-label>{{'tabs.notification' | translate}}</ion-label>
+      <ion-badge *ngIf="notificationNumber>0" color="danger">{{notificationNumber}}</ion-badge>
+    </ion-tab-button>
+    <ion-tab-button tab="more">
+      <ion-icon name="more"></ion-icon>
+      <ion-label>{{'tabs.more' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
