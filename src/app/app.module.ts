@@ -47,13 +47,13 @@ export function jwtOptionsFactory(storage) {
     whitelistedDomains: ["servidor-proyecto.herokuapp.com"]
   }
 }
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+  imports: [BrowserModule,BrowserAnimationsModule, IonicModule.forRoot(), AppRoutingModule,
     HttpClientModule,
     ComponentsModule,
     NgxWebstorageModule.forRoot(),

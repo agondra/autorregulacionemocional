@@ -1,8 +1,8 @@
 <app-header titulo="{{'ritmocardiaco.title' | translate}}" backButton="no"></app-header>
 
 <ion-content>
-    <div class="contenedor">
-            
+        <div class="contenedor" *ngIf="!comenzar">
+             
             <div class="contenedorpulsera" *ngIf="enable==false">
                     <div class="led-red"></div>
                 <div  class="warning" >Debes activar el bluetooth para utilizar esta característica</div>
@@ -32,63 +32,207 @@
                             
                          </div>
                         </div>
+                   
 
-                      
-                        <div class="contenedorpulsera" *ngIf="enable==true && emparejando==true && myband==true">
-                               
-                                <div class="contenedoremparejandof">
-                                        <div class="contenedorpulseraconectada">
-                                                
-                                                <div class="img"> 
-                                                        <img src="../../../assets/emparejada.png" alt="Pulsera" width="32" height="32">
-                                                       
-                                                     </div>
-                                            </div>
-                                        <div  class="emparejando" >Emparejada</div>
-                                        <div *ngIf="comenzar" class="lds-heart"><div></div></div>
-                                       </div>
-                                      
-                                       <div class="heart"><div class="img"> 
+                <div class="contenedorpulsera"  *ngIf="enable==true && emparejando==true && myband==true">
+
+                        <div class="contenedoremparejandof">
+                                <div class="contenedorpulseraconectada">
+
+                                        <div class="img">
+                                                <img src="../../../assets/emparejada.png" alt="Pulsera" width="32"
+                                                        height="32">
+
+                                        </div>
+                                </div>
+                                <div class="emparejando">Emparejada</div>
+                                <!-- <div *ngIf="comenzar" class="lds-heart">
+                                        <div></div>
+                                </div>-->
+                        </div>
+                        <ion-card class="cardcontent">
+                                <ion-card-header class="cardheader" (click)="card1=!card1">
+                                        Autorregulación
+                                </ion-card-header>
+                                <ion-card-content *ngIf="card1">
+                                        Cuando creas que lo necesitas activa el juego de autorregulación, debes seguir
+                                        las indicaciones y el ejercicio,
+                                        es un proceso de unos minutos que consta de varias partes. Hazlo siempre en un
+                                        momento en el que puedas concentrarte
+                                        en él y puedas dedicar varios minutos. <BR />
+                                        <strong> Para comenzarlo activa el botón de abajo.</strong>
+                                </ion-card-content>
+                        </ion-card>
+                        <ion-card class="cardcontent">
+                                <ion-card-header class="cardheader" (click)="card2=!card2">
+                                        Seguimiento de tu ritmo cardiaco
+                                </ion-card-header>
+                                <ion-card-content *ngIf="card2">
+                                        Una vez comiences el ejercicio debes tener la pulsera de monitorización puesta
+                                        para poder ir haciendo mediciones de tu ritmo cardíaco.
+                                </ion-card-content>
+                        </ion-card>
+                        <ion-card class="cardcontent">
+                                <ion-card-header class="cardheader" (click)="card3=!card3">
+                                        Cuando realizar el ejercicio
+                                </ion-card-header>
+                                <ion-card-content *ngIf="card3">
+                                        Cuando te encuentres con extrés, cuando te sientas inquieto, cuando estés
+                                        nervioso.
+                                        Puedes hacer el ejercicio en plena crisis o en el momento que mas sientas que lo
+                                        necesitas.
+                                </ion-card-content>
+                        </ion-card>
+                        <div class="heart" (click)="comenzarEjercicio()">
+                                <div class="img">
                                         <img src="../../../assets/heart.png" alt="Pulsera" width="70" height="70">
-                                       
-                                     </div> 
-                                     <div class="textoRitmo">
-                                     {{ritmocardiacoactual}} bpm
-                                     </div>
-                                     <div class="textoRitmo">
-                                     <ion-toggle (ionChange)="leerRit()" [(ngModel)]="comenzar"></ion-toggle>
-                                </div>
 
                                 </div>
-                                <ion-card class="cardcontent">
-                                        <ion-card-header class="cardheader">
-                                       Seguimiento de tu ritmo cardiaco
-                                        </ion-card-header>
-                                        <ion-card-content>
-                                        Aquí vamos a hacer un seguimiento de tus ritmo cardiaco, para poder ir haciendo una valoración de tu ansiedad. 
-                                        </ion-card-content>
-                                </ion-card>
+                                <div class="textoRitmo">
+                                        Comenzar
+                                </div>
+                                <!--  <div class="textoRitmo">
+                                        <ion-toggle (ionChange)="leerRit()" [(ngModel)]="comenzar"></ion-toggle>
+                                </div>-->
 
-                                <div class="medica2"> 
-                                       
-                                        <img class="medica" src="../../../assets/medica22.png" alt="Pulsera" width="256" height="256">
-                                        
-                                </div>
-                                <ion-card class="cardcontent">
-                                        <ion-card-header class="cardheader">
-                                       Seguimiento de tu ritmo cardiaco
-                                        </ion-card-header>
-                                        <ion-card-content>
-                                        Aquí vamos a hacer un seguimiento de tus ritmo cardiaco, para poder ir haciendo una valoración de tu ansiedad. 
-                                        </ion-card-content>
-                                </ion-card>
-                                </div>
-                       <!-- <div class="contenedorpulsera" *ngIf="enable==true && emparejando==true && myband==true">
+                        </div>
+
+                        <div class="medica2">
+
+                                <img class="medica" src="../../../assets/medica22.png" alt="Pulsera" width="256"
+                                        height="256">
+
+                        </div>
+
+                </div>
+                <!-- <div class="contenedorpulsera" *ngIf="enable==true && emparejando==true && myband==true">
                                 <div class="contenedoremparejando">
                                     <div class="lds-hourglass"></div>
                                     <div  class="emparejando" >Emparejando...</div>
                               </div>
                             </div>-->
 
-    </div>
+        </div>
+
+        <div class="contenedor" *ngIf="comenzar">
+                <div class="slide" *ngIf="slide1">
+                        <div class="contenedor">
+                                <div class="formulario">
+                                        <div class="contenedorimagen">
+
+                                        </div>
+
+                                        <div class="texto">
+                                                Elige la emoción o malestar:
+                                        </div>
+                                        <div class="contenedorinput">
+                                                <div class="inputs">
+                                                        <ion-label><input type="checkbox" [(ngModel)]="ira"
+                                                                        value="first_checkbox">&nbsp;Ira/cólera
+                                                        </ion-label>
+
+                                                </div>
+                                                <div class="inputs">
+                                                        <ion-label><input type="checkbox" [(ngModel)]="tristeza"
+                                                                        value="first_checkbox">&nbsp;Tristeza
+                                                        </ion-label>
+
+                                                </div>
+                                                <div class="inputs">
+                                                        <ion-label><input type="checkbox" [(ngModel)]="miedo"
+                                                                        value="first_checkbox">&nbsp;Miedo</ion-label>
+
+                                                </div>
+                                                <div class="inputs">
+                                                        <ion-label><input type="checkbox" [(ngModel)]="preocupacion"
+                                                                        value="first_checkbox">&nbsp;Rumiación/Preocupación
+                                                        </ion-label>
+
+                                                </div>
+                                                <div class="inputs">
+                                                        <ion-label><input type="checkbox" [(ngModel)]="impulsividad"
+                                                                        value="first_checkbox">&nbsp;Impulsividad
+                                                                incontrolable</ion-label>
+
+                                                </div>
+                                        </div>
+
+                                </div>
+
+                        </div>
+                        <div class="boton">
+                                <ion-button (click)="siguiente()"
+                                        [disabled]="ira=='' && tristeza=='' && miedo=='' && preocupacion=='' && impulsividad==''">
+                                        Continuar
+                                        <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
+                                </ion-button>
+                        </div>
+                        
+
+                </div>
+
+                <div class="slide" *ngIf="slide2">
+                        <div class="contenedor">
+                                <div class="formulario">
+                                        <div class="contenedorimagen">
+
+                                        </div>
+
+                                        <div class="texto">
+                                               El siguiente paso consiste en un ejercicio de respiración, la duración es de minuto y medio, debes acompañar tu respiración 
+                                                con la imagen que aparecerá. <br>
+                                                <img class="medica" src="../../../assets/auriculares.png" alt="Pulsera" width="48"
+                                        height="48">
+                                                Durante el ejercicio sonará música asi que sería recomendable usar auriculares. 
+                                                <br/> <br/>
+                                                El color del circulo irá variando:<br/>
+                                                &nbsp;- <img class="medica" src="../../../assets/circulorojo.png" alt="Pulsera" width="32"
+                                                height="32"> Este color indica que las pulsaciones están por encima de lo que deberían.
+                                                <br/> <br/>
+                                                &nbsp;- <img class="medica" src="../../../assets/circuloverde.png" alt="Pulsera" width="32"
+                                                height="32"> Este color indica que las pulsaciones están bajando adecuadamente.
+                                              <br/> <br/>
+                                             &nbsp;- <img class="medica" src="../../../assets/circuloazul.png" alt="Pulsera" width="32"
+                                              height="32">Este color indica que las pulsaciones están en el estado correcto.
+                                            <br/><br/>
+                                           
+                                                <strong> Cuando estés preparado haz click en el botón comenzar.</strong>
+                                        </div>
+                                       
+                                </div>
+
+                        </div>
+                        <div class="boton">
+                                <ion-button (click)="siguiente()">
+                                        Comenzar
+                                        <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
+                                </ion-button>
+                        </div>
+                        
+
+                </div>
+
+                <div  *ngIf="slide3" class="slide3">
+                        
+                                <div class="contenedorcirculo">
+                                        <div class="inspira" *ngIf="inspira">Inspira ..</div>
+                                        <div class="inspira" *ngIf="!inspira">Expira ..</div>
+                                        <div class="barracirculo">
+                                           
+                                        <div class="circulo" [@estado]="estado">
+                                       </div>
+                                       
+                                       </div>
+                                       
+                                </div>
+
+                        
+                        
+                        
+
+                </div>
+        </div>
+
+
+
 </ion-content>
