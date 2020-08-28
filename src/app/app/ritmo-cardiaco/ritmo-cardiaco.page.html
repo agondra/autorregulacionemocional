@@ -2,39 +2,41 @@
 
 <ion-content>
         <div class="contenedor" *ngIf="!comenzar">
-             
-            <div class="contenedorpulsera" *ngIf="enable==false">
-                    <div class="led-red"></div>
-                <div  class="warning" >Debes activar el bluetooth para utilizar esta característica</div>
-                <div class="img"> 
-                    <img src="../../../assets/pulserabluetooth.png" alt="Pulsera" width="300" height="330" (click)="bluetoothConnect()">
-                    
-                 </div>
-                 
-            </div>
 
-            <div class="contenedorpulsera" *ngIf="enable==true && myband==false" >
-                    <div class="led-red"></div>
-                    <div  class="warning" >Pulsa la imagen para buscar tu dispositivo myband</div>
-                    <div class="img"> 
-                            <img src="../../../assets/pulseraemparejar.png" alt="Pulsera" width="300" height="330" (click)="openModal()">
-                            
-                         </div>
+                <div class="contenedorpulsera" *ngIf="enable==false">
+                        <div class="led-red"></div>
+                        <div class="warning">Debes activar el bluetooth para utilizar esta característica</div>
+                        <div class="img">
+                                <img src="../../../assets/pulserabluetooth.png" alt="Pulsera" width="300" height="330"
+                                        (click)="bluetoothConnect()">
+
+                        </div>
+
+                </div>
+
+                <div class="contenedorpulsera" *ngIf="enable==true && myband==false">
+                        <div class="led-red"></div>
+                        <div class="warning">Pulsa la imagen para buscar tu dispositivo myband</div>
+                        <div class="img">
+                                <img src="../../../assets/pulseraemparejar.png" alt="Pulsera" width="300" height="330"
+                                        (click)="openModal()">
+
+                        </div>
                 </div>
                 <div class="contenedorpulsera" *ngIf="enable==true && emparejando==false && myband==true">
                         <div class="contenedoremparejando">
-                            <div class="lds-hourglass"></div>
-                            <div  class="emparejando" >Emparejando...</div>
-                            
-                      </div>
-                      <div class="img"> 
-                            <img src="../../../assets/logo/icono.png" alt="Pulsera" width="300" height="330">
-                            
-                         </div>
-                        </div>
-                   
+                                <div class="lds-hourglass"></div>
+                                <div class="emparejando">Emparejando...</div>
 
-                <div class="contenedorpulsera"  *ngIf="enable==true && emparejando==true && myband==true">
+                        </div>
+                        <div class="img">
+                                <img src="../../../assets/logo/icono.png" alt="Pulsera" width="300" height="330">
+
+                        </div>
+                </div>
+
+
+                <div class="contenedorpulsera" *ngIf="enable==true && emparejando==true && myband==true">
 
                         <div class="contenedoremparejandof">
                                 <div class="contenedorpulseraconectada">
@@ -167,7 +169,7 @@
                                         <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
                                 </ion-button>
                         </div>
-                        
+
 
                 </div>
 
@@ -179,26 +181,31 @@
                                         </div>
 
                                         <div class="texto">
-                                               El siguiente paso consiste en un ejercicio de respiración, la duración es de minuto y medio, debes acompañar tu respiración 
+                                                El siguiente paso consiste en un ejercicio de respiración, la duración
+                                                es de minuto y medio, debes acompañar tu respiración
                                                 con la imagen que aparecerá. <br>
-                                                <img class="medica" src="../../../assets/auriculares.png" alt="Pulsera" width="48"
-                                        height="48">
-                                                Durante el ejercicio sonará música asi que sería recomendable usar auriculares. 
-                                                <br/> <br/>
-                                                El color del circulo irá variando:<br/>
-                                                &nbsp;- <img class="medica" src="../../../assets/circulorojo.png" alt="Pulsera" width="32"
-                                                height="32"> Este color indica que las pulsaciones están por encima de lo que deberían.
-                                                <br/> <br/>
-                                                &nbsp;- <img class="medica" src="../../../assets/circuloverde.png" alt="Pulsera" width="32"
-                                                height="32"> Este color indica que las pulsaciones están bajando adecuadamente.
-                                              <br/> <br/>
-                                             &nbsp;- <img class="medica" src="../../../assets/circuloazul.png" alt="Pulsera" width="32"
-                                              height="32">Este color indica que las pulsaciones están en el estado correcto.
-                                            <br/><br/>
-                                           
+                                                <img class="medica" src="../../../assets/auriculares.png" alt="Pulsera"
+                                                        width="48" height="48">
+                                                Durante el ejercicio sonará música asi que sería recomendable usar
+                                                auriculares.
+                                                <br /> <br />
+                                                El color del circulo irá variando:<br />
+                                                &nbsp;- <img class="medica" src="../../../assets/circulorojo.png"
+                                                        alt="Pulsera" width="32" height="32"> Este color indica que las
+                                                pulsaciones están por encima de lo que deberían.
+                                                <br /> <br />
+                                                &nbsp;- <img class="medica" src="../../../assets/circuloverde.png"
+                                                        alt="Pulsera" width="32" height="32"> Este color indica que las
+                                                pulsaciones están bajando adecuadamente.
+                                                <br /> <br />
+                                                &nbsp;- <img class="medica" src="../../../assets/circuloazul.png"
+                                                        alt="Pulsera" width="32" height="32">Este color indica que las
+                                                pulsaciones están en el estado correcto.
+                                                <br /><br />
+
                                                 <strong> Cuando estés preparado haz click en el botón comenzar.</strong>
                                         </div>
-                                       
+
                                 </div>
 
                         </div>
@@ -208,94 +215,86 @@
                                         <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
                                 </ion-button>
                         </div>
-                        
+
 
                 </div>
 
-                <div  *ngIf="slide3" class="slide3">
-                        
-                                <div class="contenedorcirculo">
-                                        <div class="inspira" *ngIf="inspira">Inspira ..</div>
-                                        <div class="inspira" *ngIf="!inspira">Expira ..</div>
-                                        <div class="barracirculo">
-                                           
-                                        <div class="circulo"  [ngClass]="{'rojo': rojo, 'verde': verde, 'azul': azul}" [@estado]="estado">
-                                       </div>
-                                       
-                                       </div>
-                                       
+                <div *ngIf="slide3" class="slide3">
+
+                        <div class="contenedorcirculo">
+                                <div class="inspira" *ngIf="inspira">Inspira ..</div>
+                                <div class="inspira" *ngIf="!inspira">Expira ..</div>
+                                <div class="barracirculo">
+
+                                        <div class="circulo" [ngClass]="{'rojo': rojo, 'verde': verde, 'azul': azul}"
+                                                [@estado]="estado">
+                                        </div>
+
                                 </div>
 
-                        
-                        
-                        
+                        </div>
+
+
+
+
 
                 </div>
 
                 <div class="slide" *ngIf="slide4">
-                        <div class="contenedor" *ngIf="verde" >
+                        <div class="contenedor" *ngIf="verde">
                                 <div class="formulario">
                                         <div class="contenedorimagen">
 
                                         </div>
 
                                         <div class="texto">
-                                            Hemos conseguido que te bajes las pulsaciones y te tranquilices, aunque no hemos conseguido que llegues
-                                            al estado óptimo.
+                                                Hemos conseguido que te bajes las pulsaciones y te tranquilices, aunque
+                                                no hemos conseguido que llegues
+                                                al estado óptimo.
                                         </div>
-                                       
+
                                 </div>
 
                         </div>
-                        <div class="boton">
-                                <ion-button (click)="siguiente()">
-                                        Continuar
-                                        <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
-                                </ion-button>
-                        </div>
-                        <div class="contenedor" *ngIf="azul" >
+                       
+                        <div class="contenedor" *ngIf="azul">
                                 <div class="formulario">
                                         <div class="contenedorimagen">
 
                                         </div>
 
                                         <div class="texto">
-                                           Felicidades, hemos conseguido bajar al estado óptimo!
+                                                Felicidades, hemos conseguido bajar al estado óptimo!
                                         </div>
-                                       
+
                                 </div>
 
                         </div>
-                        <div class="boton">
-                                <ion-button (click)="siguiente()">
-                                        Continuar
-                                        <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
-                                </ion-button>
-                        </div>
-                        
-                        <div class="contenedor" *ngIf="verde" >
+                      
+                        <div class="contenedor" *ngIf="rojo">
                                 <div class="formulario">
                                         <div class="contenedorimagen">
 
                                         </div>
 
                                         <div class="texto">
-                                            Lamentablemente no hemos podido controlar tu estado, sería aconsejable que volvieras a hacer el ejercicio con mayor concentración.
-                                            Intenta aislarte para poder estar al 100%.
+                                                Lamentablemente no hemos podido controlar tu estado, sería aconsejable
+                                                que volvieras a hacer el ejercicio con mayor concentración.
+                                                Intenta aislarte para poder estar al 100%.
                                         </div>
-                                       
+
                                 </div>
 
                         </div>
                         <div class="boton">
                                 <ion-button (click)="siguiente()">
-                                        Continuar
+                                       Ir a la app
                                         <ion-icon slot="end" name="arrow-forward" expand="full"></ion-icon>
                                 </ion-button>
                         </div>
 
                 </div>
-                
+
         </div>
 
 

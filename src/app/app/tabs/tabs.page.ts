@@ -270,15 +270,15 @@ export class TabsPage implements OnInit {
   }
 
   irapp() {
-   
-    let cont=0;
-    let ritmoCardiaco:number=0;
-    for (var ritmo in this.ritmocardiacoactual){
-      ritmoCardiaco+=this.ritmocardiacoactual[ritmo];
+
+    let cont = 0;
+    let ritmoCardiaco: number = 0;
+    for (var ritmo in this.ritmocardiacoactual) {
+      ritmoCardiaco += this.ritmocardiacoactual[ritmo];
       cont++;
     }
-    
-    ritmoCardiaco=ritmoCardiaco/(cont-1);
+
+    ritmoCardiaco = ritmoCardiaco / (cont - 1);
     this.authService.setDataUser(this.sexo, this.altura, this.peso, this.deporte, ritmoCardiaco).
       subscribe(() => { console.log("Introducido correctamente los valores del usuario") },
         (err) => { console.log("error al introducir los nuevos valores del usuario", err) });
@@ -288,12 +288,39 @@ export class TabsPage implements OnInit {
       subscribe(() => { console.log("Introducida la medida correctamente") },
         (err) => { console.log("error al introducir la medida correcta", err) });
 
-        this.ngZone.run(() => {
-          this.slide1 = false;
-          this.slide2 = false;
-          this.slide3 = false;
-          this.first = false;
-        });
+
+    let data = {
+      "title": "Bienvenido al equipo de autorregulacion emocional!!!",
+      "body": "Que ganas teníamos de que formaras parte de nosotros, esta app es para ayudarte y conseguir con nuestra ayuda que te encuentres bien, hemos diseñado unos cuantos ejercicios para que puedas realizarlos y llegar a tus objetivos. Gracias por confiar en nosotros!",
+      "data": "Gracias"
+    }
+    this.notificationService.addNotification(data).subscribe(res => {
+      this.notificationService.getNotifications().subscribe(res => {
+
+        setTimeout(() => {
+          let data = {
+            "title": "Bienvenido al equipo de autorregulacion emocional!!!",
+            "body": " Que ganas teníamos de que formaras parte de nosotros, esta app es para ayudarte y conseguir con nuestra ayuda que te encuentres bien, hemos diseñado unos cuantos ejercicios para que puedas realizarlos y llegar a tus objetivos. Gracias por confiar en nosotros!",
+            "titulo": "Bienvenido a autorregulación emocional",
+            "cuerpo": "Estupendo! Te has registrado satisfactoriamente a nuestra app y ya formas parte del equipo, bienvenido!!",
+            "data": "Gracias"
+          };
+          this.notificationService.sendNotification(data);
+        }, 1000);
+      }, err => { console.log(err) });
+      console.log(res)
+    },
+      err => {
+        console.log("Error en el envío de la notificación", err);
+      });
+
+
+    this.ngZone.run(() => {
+      this.slide1 = false;
+      this.slide2 = false;
+      this.slide3 = false;
+      this.first = false;
+    });
   }
 
 }

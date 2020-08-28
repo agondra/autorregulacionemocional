@@ -25,17 +25,18 @@ export class NotificationPage implements OnInit {
   ngOnInit() {
     this.refreshNotifications()
 
-   
+
   }
 
+  //Refresca las notificaciones
   refresh(event) {
     this.refreshNotifications();
     event.target.complete();
   }
 
+  //Elimina una notificación
   deleteNotification(id) {
     this.notificationService.deleteNotification(id).subscribe(res => {
-      console.log("se ha eliminado la notificación " + res);
       this.refreshNotifications();
       this.router.navigate(['/tabs/notification']);
     },
@@ -45,6 +46,7 @@ export class NotificationPage implements OnInit {
     );
   }
 
+  //Refresca el número de notificaciones
   refreshNotifications() {
     this.presentLoading();
 
@@ -75,6 +77,7 @@ export class NotificationPage implements OnInit {
     return this.loading.present();
   }
 
+//LLeva a una notificación específica
   goNotification(notification) {
     this.notificationService.openNotifications(notification._id).subscribe(res => {
       this.refreshNotifications();
@@ -87,13 +90,22 @@ export class NotificationPage implements OnInit {
 
     this.router.navigate(['notification-detail', notification.title, notification.body, notification.data, notification._id]);
   }
-
+/*
   onSubmit() {
 
     this.notificationService.addNotification(this.form.value).subscribe(res => {
       this.notificationService.getNotifications().subscribe(res => {
         this.refreshNotifications();
-        setTimeout(() => { this.notificationService.sendNotification(this.form.value); }, 1000);
+        setTimeout(() => {
+          let data = {
+            "title": this.form.value.title,
+            "body": this.form.value.body,
+            "titulo": "Bienvenido a autorregulación emocional",
+            "cuerpo": "Estupendo! Te has registrado satisfactoriamente a nuestra app y ya formas parte del equipo, bienvendio!!",
+            "data": this.form.value.data
+          };
+          this.notificationService.sendNotification(data);
+        }, 1000);
       }, err => { console.log(err) });
       console.log(res)
     },
@@ -101,9 +113,7 @@ export class NotificationPage implements OnInit {
         console.log("Error en el envío de la notificación", err);
       });
 
-
-
-
   }
+  */
 
 }

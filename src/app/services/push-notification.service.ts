@@ -64,10 +64,11 @@ export class PushNotificationService {
   
     this.body={
       "notification":{
-        "title":"Ionic 4 Notification",
-        "body":"This notification sent from POSTMAN using Firebase HTTP protocol",
-        "sound":"sound",
+        "title":data.titulo,
+        "body":data.cuerpo,
+        "sound":"audio.ogg",
         "click_action":"FCM_PLUGIN_ACTIVITY",
+        "color": "#26D5C1",
         "icon":"fcm_push_icon"
       },
       "data":{

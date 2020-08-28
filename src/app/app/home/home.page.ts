@@ -38,8 +38,7 @@ export class HomePage implements OnInit {
         let i = 0;
         for (medida in this.medidas) {
           if (i < 7) {
-            console.log(this.medidas);
-            console.log("medidas",this.medidas[i].ira)
+            
             this.tc.push(this.medidas[i].tc);
             this.fecha.push(new Date(this.medidas[i].startDate).toLocaleString("es-ES", { day: "numeric", month: "long" }));
             if (this.medidas[i].ira) {
@@ -169,10 +168,28 @@ export class HomePage implements OnInit {
         let i = 0;
         this.tc = [];
         this.fecha = [];
+        for(let j=0;j<7;j++){
+          this.medidas[j]=0;
+        }
         for (medida in this.medidas) {
           if (i < 7) {
             this.tc.push(this.medidas[i].tc);
             this.fecha.push(new Date(this.medidas[i].startDate).toLocaleString("es-ES", { day: "numeric", month: "long" }));
+            if (this.medidas[i].ira) {
+              this.emociones[0]++;
+            }
+            if (this.medidas[i].tristeza) {
+              this.emociones[1]++;
+            }
+            if (this.medidas[i].miedo) {
+              this.emociones[2]++;
+            }
+            if (this.medidas[i].preocupacion) {
+              this.emociones[3]++;
+            }
+            if (this.medidas[i].impulsividad) {
+              this.emociones[4]++;
+            }
             i++;
           } else {
             break;
